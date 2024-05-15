@@ -7,6 +7,12 @@
   src: url("/Wonder-Font/Wonder.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "samurai";
+  src: url("/samurai-blast-font/SamuraiBlast-YznGj.ttf")
+    format("truetype");
+}
+
 body::-webkit-scrollbar {
   width: 0;
 }

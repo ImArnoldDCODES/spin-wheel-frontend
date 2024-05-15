@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TransitionLink from "../../components/TransitionLink";
 
 export default function Home() {
   return (
@@ -51,12 +52,11 @@ export default function Home() {
         style={{ maxWidth: "none" }}
         className="h-[30rem] w-[30rem] mt-[-5rem] z-[2] md:w-[30rem] md:h-[30rem] lg:mt-[-8rem]"
       />
-      <button
+      <TransitionLink
+        href="/play"
+        label="play"
         className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[3rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
-        style={{ fontFamily: "wonder" }}
-      >
-        play
-      </button>
+      />
       <Image
         src="/leaf-vector.png"
         alt="wheel"
