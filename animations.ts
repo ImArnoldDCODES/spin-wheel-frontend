@@ -25,7 +25,6 @@ export const animatePageIn = () => {
   }
 };
 
-
 export const animatePageOut = (href: string, router: AppRouterInstance) => {
   const animationWrapper = document.getElementById("transition-element");
 

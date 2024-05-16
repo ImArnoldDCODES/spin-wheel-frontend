@@ -1,6 +1,22 @@
-import React from "react";
+"use client";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
+
 export default function Index() {
+  const image = useRef<HTMLImageElement>(null);
+  const [totatlRotation, useTotalRotation] = useState(0);
+
+  const handleClick = () => {
+    const randomStop = Math.random();
+    const rotation = 360 * 5 + 360 * randomStop + totatlRotation;
+    useTotalRotation(rotation);
+    if (image.current) {
+      image.current.style.transition = "transform 5s ease-out";
+      image.current.style.transform = `rotate(${rotation}deg)`;
+    }
+    console.log(image.current?.style);
+  };
+
   return (
     <main className="min-h-screen px-24 bg-[#FFA500]">
       <div className="w-[fit-content] flex gap-5 ml-auto pt-[2rem]">
@@ -40,10 +56,12 @@ export default function Index() {
             width={100}
             height={100}
             className="w-[20rem]"
+            ref={image}
           />
           <h3
             className="absolute top-[42%] left-[40%] transform-translate-1/2-1/2 bg-[#FFD700] text-center h-[4rem] w-[4rem] rounded-full uppercase bold cursor-pointer"
-            style={{ lineHeight: "4rem", fontFamily: "samurai"  }}
+            style={{ lineHeight: "4rem", fontFamily: "samurai" }}
+            onClick={handleClick}
           >
             spin
           </h3>
