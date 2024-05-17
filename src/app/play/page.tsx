@@ -1,21 +1,44 @@
 "use client";
-import React, { useRef, useState } from "react";
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
+import data from "./data.json";
+import { ColorData } from "../../../interface/interface";
 
 export default function Index() {
   const image = useRef<HTMLImageElement>(null);
-  const [totatlRotation, useTotalRotation] = useState(0);
+  const [totalRotation, setTotalRotation] = useState<number>(0);
+  const [spinnerChanger, setSpinnerChanger] = useState<string>("red");
+  const [running, setRunning] = useState<boolean>(false);
+  const [newJson, setNewJson] = useState<ColorData[]>([]);
 
   const handleClick = () => {
-    const randomStop = Math.random();
-    const rotation = 360 * 5 + 360 * randomStop + totatlRotation;
-    useTotalRotation(rotation);
-    if (image.current) {
-      image.current.style.transition = "transform 5s ease-out";
-      image.current.style.transform = `rotate(${rotation}deg)`;
+    if (!running) {
+      setRunning(true);
+      const randomStop = Math.random();
+      const rotation = 360 * 5 + 360 * randomStop + totalRotation;
+      setTotalRotation(rotation);
+
+      if (image.current) {
+        image.current.style.transition = "transform 5s ease-out";
+        image.current.style.transform = `rotate(${rotation}deg)`;
+      }
+
+      setTimeout(() => {
+        setRunning(false);
+      }, 2000);
     }
-    console.log(image.current?.style);
   };
+
+  const handleChange = (color: string) => {
+    if (!running) {
+      setSpinnerChanger(color);
+    }
+  };
+
+  useEffect(() => {
+    const filteredData = data.filter((res) => res.color === spinnerChanger);
+    setNewJson(filteredData);
+  }, [spinnerChanger]);
 
   return (
     <main className="min-h-screen px-24 bg-[#FFA500]">
@@ -25,33 +48,44 @@ export default function Index() {
           alt="spinner"
           width={100}
           height={100}
+          onClick={() => handleChange("black")}
+          className="cursor-pointer"
         />
-        <Image src="/spinner-red.png" alt="spinner" width={100} height={100} />
+        <Image
+          src="/spinner-red.png"
+          alt="spinner"
+          width={100}
+          height={100}
+          onClick={() => handleChange("red")}
+          className="cursor-pointer"
+        />
         <Image
           src="/spinner-multicolor.png"
           alt="spinner"
           width={100}
           height={100}
+          onClick={() => handleChange("multicolor")}
+          className="cursor-pointer"
         />
       </div>
       <div className="flex flex-row items-center mt-24 justify-between">
         <div className="max-w-[18rem] bg-[#FF4500] text-white rounded-lg px-5 py-5">
-          <h1
-            className="uppercase underline text-[1.2rem]"
-            style={{ fontFamily: "wonder" }}
-          >
-            Multi-Color
-          </h1>
-          <h3 style={{ fontFamily: "samurai" }}>
-            Spin the Wheel of Colors and let fate decide your palette! Watch as
-            hues dance and merge, creating a vibrant symphony of shades. Where
-            will the wheel stop? Embrace the unexpected and infuse your world
-            with a kaleidoscope of possibilities
-          </h3>
+          {newJson?.map((res) => (
+            <>
+              <h1
+                className="uppercase underline text-[1.2rem]"
+                style={{ fontFamily: "wonder" }}
+              >
+                {res.color}
+              </h1>
+              <h3 style={{ fontFamily: "samurai" }}>{res.text}</h3>
+            </>
+          ))}
         </div>
         <div className="relative">
+          <Image src={"/Arrow.png"} alt="arrow" width={100} height={100} className="absolute top-[44%] left-[-20%] z-[2]"/>
           <Image
-            src="/spinner-multicolor.png"
+            src={`/spinner-${spinnerChanger}.png`}
             alt="spinner"
             width={100}
             height={100}
