@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import data from "./data.json";
 import { ColorData } from "../../../interface/interface";
 import SpinTheWheel from "../../../components/Wheel";
+import TransitionLink from "../../../components/TransitionLink";
 
 export default function Index() {
   const image = useRef<HTMLImageElement>(null);
@@ -43,8 +43,13 @@ export default function Index() {
 
   return (
     <main className="min-h-screen px-24 bg-[#FFA500]">
-      <div className="w-[fit-content] flex gap-5 ml-auto pt-[2rem]">
-        <Image
+      <div className="w-[fit-content] flex gap-5 mr-auto pt-[2rem]">
+        <TransitionLink
+          href="/login"
+          label="login"
+          className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[3rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
+        />
+        {/* <Image
           src="/spinner-black.png"
           alt="spinner"
           width={100}
@@ -67,7 +72,7 @@ export default function Index() {
           height={100}
           onClick={() => handleChange("multicolor")}
           className="cursor-pointer"
-        />
+        /> */}
       </div>
       <div className="flex flex-row items-center mt-24 justify-between">
         <div className="max-w-[18rem] bg-[#FF4500] text-white rounded-lg px-5 py-5">
