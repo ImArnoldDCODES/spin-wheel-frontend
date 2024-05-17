@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import data from "./data.json";
 import { ColorData } from "../../../interface/interface";
+import SpinTheWheel from "../../../components/Wheel";
 
 export default function Index() {
   const image = useRef<HTMLImageElement>(null);
@@ -82,8 +83,8 @@ export default function Index() {
             </>
           ))}
         </div>
-        <div className="relative">
-          <Image src={"/Arrow.png"} alt="arrow" width={100} height={100} className="absolute top-[44%] left-[-20%] z-[2]"/>
+        <div className="relative border-2 border-[#000]">
+          {/* <Image src={"/Arrow.png"} alt="arrow" width={100} height={100} className="absolute top-[44%] left-[-20%] z-[2]"/>
           <Image
             src={`/spinner-${spinnerChanger}.png`}
             alt="spinner"
@@ -98,7 +99,8 @@ export default function Index() {
             onClick={handleClick}
           >
             spin
-          </h3>
+          </h3> */}
+          <SpinTheWheel />
         </div>
         <div className="w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">
           <h1
