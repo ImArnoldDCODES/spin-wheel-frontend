@@ -1,5 +1,3 @@
-"use clients";
-import React from "react";
 import TransitionLink from "../../../components/TransitionLink";
 
 export default function Index() {
@@ -18,7 +16,7 @@ export default function Index() {
           className="text-[3rem] font-bold mt-[25%]"
           style={{ fontFamily: "samurai" }}
         >
-         Sign In
+          Sign In
         </h1>
 
         <form
@@ -42,7 +40,7 @@ export default function Index() {
           />
 
           <TransitionLink
-            href="/dashboard"
+            href="/admin/dashboard"
             label="Sign In"
             className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[2rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
           />

@@ -29,6 +29,7 @@ export const animatePageOut = (href: string, router: AppRouterInstance) => {
   const animationWrapper = document.getElementById("transition-element");
 
   if (animationWrapper) {
+    console.log(animationWrapper, "checking")
     const tl = gsap.timeline();
 
     tl.set(animationWrapper, {

@@ -49,6 +49,7 @@ export default function Home() {
         width={100}
         height={100}
         unoptimized
+        priority
         style={{ maxWidth: "none" }}
         className="h-[30rem] w-[30rem] mt-[-5rem] z-[2] md:w-[30rem] md:h-[30rem] lg:mt-[-8rem]"
       />

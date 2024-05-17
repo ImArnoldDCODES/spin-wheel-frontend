@@ -1,5 +1,3 @@
-"use clients";
-import React from "react";
 import TransitionLink from "../../../components/TransitionLink";
 
 export default function Index() {
@@ -10,7 +8,7 @@ export default function Index() {
           className="text-[3rem] mt-[25%] p-10"
           style={{ fontFamily: "wonder" }}
         >
-         H Play with Friends <br /> and share prizes with people close to you🎉💖
+         Play with Friends <br /> and share prizes with people close to you🎉💖
         </h1>
       </div>
       <div className="w-[50%] h-[full] bg-[#fff] flex flex-col p-10">

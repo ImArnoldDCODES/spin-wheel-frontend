@@ -76,8 +76,8 @@ export default function Index() {
       </div>
       <div className="flex flex-row items-center mt-24 justify-between">
         <div className="max-w-[18rem] bg-[#FF4500] text-white rounded-lg px-5 py-5">
-          {newJson?.map((res) => (
-            <>
+          {newJson?.map((res, index) => (
+            <div key={index}>
               <h1
                 className="uppercase underline text-[1.2rem]"
                 style={{ fontFamily: "wonder" }}
@@ -85,7 +85,7 @@ export default function Index() {
                 {res.color}
               </h1>
               <h3 style={{ fontFamily: "samurai" }}>{res.text}</h3>
-            </>
+            </div>
           ))}
         </div>
         <div className="relative border-2 border-[#000]">
