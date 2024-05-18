@@ -1,9 +1,9 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
-import data from "./data.json";
-import { ColorData } from "../../../interface/interface";
-import SpinTheWheel from "../../../components/Wheel";
+import { useEffect, useRef, useState } from "react";
 import TransitionLink from "../../../components/TransitionLink";
+import SpinTheWheel from "../../../components/Wheel";
+import { ColorData } from "../../../interface/interface";
+import data from "./data.json";
 
 export default function Index() {
   const image = useRef<HTMLImageElement>(null);
@@ -15,7 +15,7 @@ export default function Index() {
 
   const handleRecent = (prop: number | undefined) => {
     if (prop !== undefined) {
-      setRecents(prevArray => {
+      setRecents((prevArray) => {
         const newData = [...prevArray, prop];
         console.log(newData, "res");
         return newData;
@@ -116,7 +116,7 @@ export default function Index() {
           >
             spin
           </h3> */}
-          <SpinTheWheel onDataFromChild={handleRecent} />
+          <SpinTheWheel resData={handleRecent} />
         </div>
         <div className="w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">
           <h1
@@ -126,11 +126,9 @@ export default function Index() {
             Recent
           </h1>
           <ul className="" style={{ fontFamily: "samurai" }}>
-            <li>5 (19s ago)</li>
-            <li>3 (14s ago)</li>
-            <li>8 (10s ago)</li>
-            <li>1 (5s ago)</li>
-            <li>9 (2s ago)</li>
+            {recents.slice(-5)?.map((data: number, index) => (
+              <li key={index}>{data} (18s ago)</li>
+            ))}
           </ul>
         </div>
       </div>

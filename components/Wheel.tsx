@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface ChildComponentProps {
-  onDataFromChild: (prop?: number) => void;
+  resData: (prop?: number) => void;
 }
 
-const SpinTheWheel: React.FC<ChildComponentProps> = ({ onDataFromChild }) => {
+const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
@@ -61,9 +61,8 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ onDataFromChild }) => {
   }, [currentAngle, drawWheel]);
 
   const spinWheel = () => {
-    onDataFromChild(selectedSegment);
-    
-    
+    resData(selectedSegment);
+
     if (spinning) return;
     setSpinning(true);
     setSelectedSegment(0);
@@ -105,9 +104,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ onDataFromChild }) => {
       <button onClick={spinWheel} disabled={spinning}>
         Spin
       </button>
-      {selectedSegment !== null && (
-        <div>The wheel landed on: {selectedSegment}</div>
-      )}
     </div>
   );
 };
