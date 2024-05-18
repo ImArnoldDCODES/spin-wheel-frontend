@@ -46,11 +46,11 @@ export default function Index() {
           />
           <p>
             Don't have an account? {""}
-            <TransitionLink
+            {/* <TransitionLink
               href="/play"
               label="Create Account"
               className="uppercase text-[#FFD700] text-[1rem] hover:text-[#FF0000]"
-            />
+            /> */}
           </p>
         </form>
       </div>

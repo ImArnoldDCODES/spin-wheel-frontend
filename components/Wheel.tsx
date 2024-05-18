@@ -1,10 +1,14 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 
-const SpinTheWheel: React.FC = () => {
+interface ChildComponentProps {
+  onDataFromChild: (prop?: number) => void;
+}
+
+const SpinTheWheel: React.FC<ChildComponentProps> = ({ onDataFromChild }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
-  const [selectedSegment, setSelectedSegment] = useState<number | null>(null);
+  const [selectedSegment, setSelectedSegment] = useState<number>(0);
 
   const segments = [1, 2, 3, 4, 5, 6, 7, 8];
   const colors = [
@@ -57,9 +61,12 @@ const SpinTheWheel: React.FC = () => {
   }, [currentAngle, drawWheel]);
 
   const spinWheel = () => {
+    onDataFromChild(selectedSegment);
+    
+    
     if (spinning) return;
     setSpinning(true);
-    setSelectedSegment(null);
+    setSelectedSegment(0);
 
     let spinAngle = Math.random() * 2 * Math.PI + 10 * Math.PI;
     const spinDuration = 3000;

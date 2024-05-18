@@ -11,6 +11,17 @@ export default function Index() {
   const [spinnerChanger, setSpinnerChanger] = useState<string>("red");
   const [running, setRunning] = useState<boolean>(false);
   const [newJson, setNewJson] = useState<ColorData[]>([]);
+  const [recents, setRecents] = useState<number[]>([]);
+
+  const handleRecent = (prop: number | undefined) => {
+    if (prop !== undefined) {
+      setRecents(prevArray => {
+        const newData = [...prevArray, prop];
+        console.log(newData, "res");
+        return newData;
+      });
+    }
+  };
 
   const handleClick = () => {
     if (!running) {
@@ -88,7 +99,7 @@ export default function Index() {
             </div>
           ))}
         </div>
-        <div className="relative border-2 border-[#000]">
+        <div className="relative">
           {/* <Image src={"/Arrow.png"} alt="arrow" width={100} height={100} className="absolute top-[44%] left-[-20%] z-[2]"/>
           <Image
             src={`/spinner-${spinnerChanger}.png`}
@@ -105,7 +116,7 @@ export default function Index() {
           >
             spin
           </h3> */}
-          <SpinTheWheel />
+          <SpinTheWheel onDataFromChild={handleRecent} />
         </div>
         <div className="w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">
           <h1

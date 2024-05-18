@@ -13,10 +13,10 @@ export default function TransitionLink({
   className: string;
 }) {
   const router = useRouter();
+  console.log(href, "reff");
 
   const handleClick = () => {
     animatePageOut(href, router);
-    console.log(href, "reff");
   };
 
   return (
