@@ -96,12 +96,26 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   };
 
   return (
-    <div>
+    <div
+      className="relative"
+      style={{
+        width: `${remSize * 3}rem`,
+        height: `${remSize * 2}rem`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <canvas
         ref={canvasRef}
-        style={{ width: `${remSize * 3}rem`, height: `${remSize * 2}rem` }}
+        style={{ width: "100%", height: "100%" }}
       ></canvas>
-      <button onClick={spinWheel} disabled={spinning}>
+      <button
+        className="bg-[#FFD700] text-center h-[4rem] w-[4rem] rounded-full uppercase bold cursor-pointer border-2 border-[#000] absolute"
+        style={{ lineHeight: "4rem", fontFamily: "samurai" }}
+        onClick={spinWheel}
+        disabled={spinning}
+      >
         Spin
       </button>
     </div>
