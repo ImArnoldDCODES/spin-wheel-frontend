@@ -2,10 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { createContext } from "react";
 import useaxios from "../axios";
-import {
-  AuthContextType,
-  AuthProviderProps
-} from "../interface/interface";
+import { AuthContextType, AuthProviderProps } from "../interface/interface";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -13,10 +10,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
-    await useaxios.post("/login", {
-      email,
-      password,
-    });
+    await useaxios
+      .post("/login", {
+        email,
+        password,
+      })
+      .then((res) => localStorage.setItem("token", res.data.token));
     router.push("/admin/dashboard");
   };
 
@@ -37,4 +36,3 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 };
 
 export { AuthProvider, AuthContext };
-

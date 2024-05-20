@@ -22,7 +22,6 @@ export default function Index() {
       .then((data) => setProfile(data.data));
   }, []);
 
-  console.log(profile, "profile");
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
