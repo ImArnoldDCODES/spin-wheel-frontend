@@ -1,32 +1,36 @@
 "use client";
-import React, { useContext } from "react";
+import { useEffect, useState } from "react";
+import useaxios from "../../../../axios";
 import Navbar from "../../../../components/Navbar";
-import { TableRow } from "../../../../interface/interface";
-import { AuthContext } from "../../../../context/AuthContext";
+import { TableRow, User } from "../../../../interface/interface";
 
 export default function Index() {
-  const authContext = useContext(AuthContext);
+  const [profile, setProfile] = useState<User | null>(null);
 
-  if (!authContext) {
-    throw new Error("AuthContext must be within an AuthProvider");
-  }
-
-  const { user } = authContext;
   const tableData: TableRow[] = [
     { name: "$20 Wheel", date: "2024-05-17", number: 1 },
     { name: "Random Stuff", date: "2024-05-16", number: 2 },
     { name: "Twitter Giveaway", date: "2024-05-15", number: 3 },
   ];
 
-  console.log(user)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    useaxios
+      .get("/profile", {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((data) => setProfile(data.data));
+  }, []);
+
+  console.log(profile, "profile");
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
       <Navbar />
       <div className="w-[80%] h-[full]">
-        <div>
-          <h1 className="text-[3rem] m-10">Dashboard</h1>
-          <h2>Welcome back, {user?.name}</h2>
+        <div className="flex items-center justify-between my-5 px-8">
+          <h1 className="text-[3rem] text-center">Dashboard</h1>
+          <h2 className="text-center">Welcome back, <span className="uppercase">{profile?.name}</span></h2>
         </div>
         <div className="ml-10 flex gap-10">
           <div className="rounded-lg pl-4 w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col">

@@ -1,35 +1,22 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext } from "react";
 import useaxios from "../axios";
 import {
   AuthContextType,
-  AuthProviderProps,
-  User,
+  AuthProviderProps
 } from "../interface/interface";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>();
   const router = useRouter();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    console.log(storedUser, "hello");
-  }, []);
-
   const login = async (email: string, password: string) => {
-    const res = await useaxios.post("/login", {
+    await useaxios.post("/login", {
       email,
       password,
     });
-
-    const profile = await useaxios.get("/profile", {
-      headers: { Authorization: "Bearer " + res.data.token },
-    });
-    setUser(profile.data);
-    localStorage.setItem("user", JSON.stringify(user));
     router.push("/admin/dashboard");
   };
 
@@ -43,10 +30,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register }}>
+    <AuthContext.Provider value={{ login, register }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export { AuthProvider, AuthContext };
+
