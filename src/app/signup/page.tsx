@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import TransitionLink from "../../../components/TransitionLink";
 import { AuthContext } from "../../../context/AuthContext";
 
@@ -14,7 +14,7 @@ export default function Index() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     register(name, email, password);
   };

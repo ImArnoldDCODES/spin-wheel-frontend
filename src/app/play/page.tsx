@@ -35,22 +35,6 @@ export default function Index() {
           </h1>
         </div>
         <div>
-          {/* <Image src={"/Arrow.png"} alt="arrow" width={100} height={100} className="absolute top-[44%] left-[-20%] z-[2]"/>
-          <Image
-            src={`/spinner-${spinnerChanger}.png`}
-            alt="spinner"
-            width={100}
-            height={100}
-            className="w-[20rem]"
-            ref={image}
-          />
-          <h3
-            className="absolute top-[42%] left-[40%] transform-translate-1/2-1/2 bg-[#FFD700] text-center h-[4rem] w-[4rem] rounded-full uppercase bold cursor-pointer"
-            style={{ lineHeight: "4rem", fontFamily: "samurai" }}
-            onClick={handleClick}
-          >
-            spin
-          </h3> */}
           <SpinTheWheel resData={handleRecent} />
         </div>
         <div className="w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">

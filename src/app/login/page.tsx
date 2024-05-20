@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
 import { AuthContext } from "../../../context/AuthContext";
+import TransitionLink from "../../../components/TransitionLink";
 
 export default function Index() {
   const authContext = useContext(AuthContext);
@@ -10,15 +10,13 @@ export default function Index() {
     throw new Error("AuthContext must be within an AuthProvider");
   }
 
-  const router = useRouter();
   const { login } = authContext;
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();    
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     await login(email, password);
-    router.push("/admin/dashboard");
   };
 
   return (
@@ -69,11 +67,11 @@ export default function Index() {
           </button>
           <p>
             Don't have an account? {""}
-            {/* <TransitionLink
-              href="/play"
+            <TransitionLink
+              href="/signup"
               label="Create Account"
               className="uppercase text-[#FFD700] text-[1rem] hover:text-[#FF0000]"
-            /> */}
+            />
           </p>
         </form>
       </div>

@@ -1,20 +1,10 @@
 "use client";
-import React, { createContext, ReactNode, useState } from "react";
-import useaxios from "../axios";
 import { useRouter } from "next/navigation";
-
-interface AuthContextType {
-  user?: string;
-  login: (email: string, password: string) => void;
-  register: (name: string, email: string, password: string) => void;
-}
+import React, { createContext, useState } from "react";
+import useaxios from "../axios";
+import { AuthContextType, AuthProviderProps } from "../interface/interface";
 
 const AuthContext = createContext<AuthContextType | null>(null);
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string>("");
@@ -31,6 +21,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       headers: { Authorization: "Bearer " + res.data.token },
     });
     setUser(profile.data);
+    router.push('/admin/dashboard')
   };
 
   const register = async (name: string, email: string, password: string) => {
@@ -50,3 +41,4 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 };
 
 export { AuthProvider, AuthContext };
+
