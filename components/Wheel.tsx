@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 
 interface ChildComponentProps {
   resData: (prop?: number) => void;
@@ -8,10 +8,10 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
-  const [selectedSegment, setSelectedSegment] = useState<number>(0);
+  const [selectedSegment, setSelectedSegment] = useState<number>();
 
-  const segments = [1, 2, 3, 4, 5, 6, 7, 8];
-  const colors = [
+  const segments =  useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], [])
+  const colors = useMemo(() => [
     "#FF5733",
     "#33FF57",
     "#3357FF",
@@ -20,7 +20,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     "#33FFF5",
     "#8D33FF",
     "#FF8D33",
-  ];
+  ], [])
   const remSize = 13;
   const radius = remSize + 50;
 
@@ -111,8 +111,8 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         style={{ width: "100%", height: "100%" }}
       ></canvas>
       <button
-        className="bg-[#FFD700] text-center h-[4rem] w-[4rem] rounded-full uppercase bold cursor-pointer border-2 border-[#000] absolute"
-        style={{ lineHeight: "4rem", fontFamily: "samurai" }}
+        className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
+        style={{ lineHeight: "4rem", fontFamily: "samurai", borderRadius: '50%', width: '4rem', height: '4rem' }}
         onClick={spinWheel}
         disabled={spinning}
       >

@@ -3,22 +3,20 @@ import TransitionLink from "./TransitionLink";
 
 export default function Navbar() {
   return (
-    <main className="flex flex-col w-[20%] h-[full] bg-[#FFA500]">
-      <ul className="flex flex-col gap-10 mt-20">
+    <main className="flex flex-col w-[30%] h-[full] bg-[#FFA500]">
+      <div className="py-5 flex flex-col gap-5 align-center justify-center h-full w-full relative">
         <TransitionLink
           href="/admin/dashboard"
           label="Dashboard"
-          className="text-[1rem] bg-[#F5F5DC] py-1 px-2 ml-2 rounded-l cursor-pointer text-center border-2 flex"
+          className="w-[80%] bg-[#fff] text-[1rem] hover:text-[#FF0000]"
         />
         <TransitionLink
           href="/admin/create"
-          label="Create"
-          className="text-[1rem] bg-[#F5F5DC] py-1 px-2 ml-2 rounded-l cursor-pointer text-center border-2 flex"
+          label="Creare"
+          className="w-[80%] bg-[#fff] text-[1rem] hover:text-[#FF0000]"
         />
-      </ul>
-      <h5 className="text-white mt-auto ml-auto mb-[1rem] mr-[1rem] cursor-pointer">
-        Logout
-      </h5>
+
+      </div>
     </main>
   );
 }
