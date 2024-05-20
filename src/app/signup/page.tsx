@@ -1,6 +1,24 @@
+"use client"
+import { useContext, useState } from "react";
 import TransitionLink from "../../../components/TransitionLink";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function Index() {
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error("AuthContext must be within an AuthProvider");
+  }
+  const { register } = authContext;
+
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    register(name, email, password);
+  };
+
   return (
     <main className="min-h-screen bg-[#FFA500] flex w-full">
       <div className="w-[50%] h-[full]">
@@ -8,7 +26,7 @@ export default function Index() {
           className="text-[3rem] mt-[25%] p-10"
           style={{ fontFamily: "wonder" }}
         >
-         Play with Friends <br /> and share prizes with people close to you🎉💖
+          Play with Friends <br /> and share prizes with people close to you🎉💖
         </h1>
       </div>
       <div className="w-[50%] h-[full] bg-[#fff] flex flex-col p-10">
@@ -20,7 +38,7 @@ export default function Index() {
         </h1>
 
         <form
-          action=""
+          onSubmit={handleSubmit}
           className="flex flex-col mt-5 gap-10"
           style={{ fontFamily: "samurai" }}
         >
@@ -30,6 +48,7 @@ export default function Index() {
             id="FullName"
             placeholder="Full Name"
             className="border-b-[1px] border-b-[#000] outline-none"
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="email"
@@ -37,6 +56,7 @@ export default function Index() {
             id="email"
             placeholder="Email Address"
             className="border-b-[1px] border-b-[#000] outline-none"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
@@ -44,13 +64,14 @@ export default function Index() {
             id="password"
             placeholder="Password"
             className="border-b-[1px] border-b-[#000] outline-none"
+            onChange={(e) => setPassword(e.target.value)}
           />
-
-          <TransitionLink
-            href="/dashboard"
-            label="Create Account"
+          <button
+            type="submit"
             className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[2rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
-          />
+          >
+            Sign In
+          </button>
           <p>
             Already have an account? {""}
             <TransitionLink

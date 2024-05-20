@@ -1,6 +1,26 @@
-import TransitionLink from "../../../components/TransitionLink";
+"use client";
+import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function Index() {
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error("AuthContext must be within an AuthProvider");
+  }
+
+  const router = useRouter();
+  const { login } = authContext;
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();    
+    await login(email, password);
+    router.push("/admin/dashboard");
+  };
+
   return (
     <main className="min-h-screen bg-[#FFA500] flex w-full">
       <div className="w-[50%] h-[full]">
@@ -23,6 +43,7 @@ export default function Index() {
           action=""
           className="flex flex-col mt-5 gap-10"
           style={{ fontFamily: "samurai" }}
+          onSubmit={handleSubmit}
         >
           <input
             type="email"
@@ -30,6 +51,7 @@ export default function Index() {
             id="email"
             placeholder="Email Address"
             className="border-b-[1px] border-b-[#000] outline-none"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
@@ -37,13 +59,14 @@ export default function Index() {
             id="password"
             placeholder="Password"
             className="border-b-[1px] border-b-[#000] outline-none"
+            onChange={(e) => setPassword(e.target.value)}
           />
-
-          <TransitionLink
-            href="/admin/dashboard"
-            label="Sign In"
+          <button
+            type="submit"
             className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[2rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
-          />
+          >
+            Sign In
+          </button>
           <p>
             Don't have an account? {""}
             {/* <TransitionLink

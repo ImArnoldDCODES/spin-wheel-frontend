@@ -10,7 +10,6 @@ export default function Index() {
     if (prop !== undefined) {
       setRecents((prevArray) => {
         const newData = [...prevArray, prop];
-        console.log(newData, "res");
         return newData;
       });
     }
