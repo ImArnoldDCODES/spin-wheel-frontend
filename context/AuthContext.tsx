@@ -2,11 +2,11 @@
 import { useRouter } from "next/navigation";
 import React, { createContext } from "react";
 import useaxios from "../axios";
-import { AuthContextType, AuthProviderProps } from "../interface/interface";
+import { AuthContextType, ContextProviderProps } from "../interface/interface";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const router = useRouter();
 
   const login = async (email: string, password: string) => {

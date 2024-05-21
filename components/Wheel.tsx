@@ -1,4 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useContext,
+} from "react";
+import { WheelContext } from "../context/WheelContext";
 
 interface ChildComponentProps {
   resData: (prop?: number) => void;
@@ -9,18 +18,23 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
   const [selectedSegment, setSelectedSegment] = useState<number>();
+  const [showModal, setShowModal] = useState<boolean>(true);
+  const [name, setName] = useState<string>("");
 
-  const segments =  useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], [])
-  const colors = useMemo(() => [
-    "#FF5733",
-    "#33FF57",
-    "#3357FF",
-    "#F3FF33",
-    "#FF33A6",
-    "#33FFF5",
-    "#8D33FF",
-    "#FF8D33",
-  ], [])
+  const segments = useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], []);
+  const colors = useMemo(
+    () => [
+      "#FF5733",
+      "#33FF57",
+      "#3357FF",
+      "#F3FF33",
+      "#FF33A6",
+      "#33FFF5",
+      "#8D33FF",
+      "#FF8D33",
+    ],
+    []
+  );
   const remSize = 13;
   const radius = remSize + 50;
 
@@ -60,6 +74,28 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     drawWheel();
   }, [currentAngle, drawWheel]);
 
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id") || '';
+
+  useEffect(() => {
+    if (id) {
+      setShowModal(true);
+    }
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setShowModal(false);
+  };
+
+  const wheelContext = useContext(WheelContext);
+
+  if (!wheelContext) {
+    throw new Error("AuthContext must be within an AuthProvider");
+  }
+
+  const { winner } = wheelContext;
+
   const spinWheel = () => {
     resData(selectedSegment);
 
@@ -89,6 +125,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           (segments.length - finalAngle / anglePerSegment) % segments.length
         );
         setSelectedSegment(segments[segmentIndex]);
+        winner(name, segmentIndex.toString(), id);
       }
     };
 
@@ -96,29 +133,58 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   };
 
   return (
-    <div
-      className="relative"
-      style={{
-        width: `${remSize * 3}rem`,
-        height: `${remSize * 2}rem`,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <canvas
-        ref={canvasRef}
-        style={{ width: "100%", height: "100%" }}
-      ></canvas>
-      <button
-        className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
-        style={{ lineHeight: "4rem", fontFamily: "samurai", borderRadius: '50%', width: '4rem', height: '4rem' }}
-        onClick={spinWheel}
-        disabled={spinning}
+    <>
+      {showModal && (
+        <div className="fixed inset-0 z-[2] flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg">
+            <h2 className="text-lg font-semibold mb-4">Enter Your Name</h2>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="border border-gray-300 rounded px-3 py-2 mr-2"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <div
+        className="relative"
+        style={{
+          width: `${remSize * 3}rem`,
+          height: `${remSize * 2}rem`,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        Spin
-      </button>
-    </div>
+        <canvas
+          ref={canvasRef}
+          style={{ width: "100%", height: "100%" }}
+        ></canvas>
+        <button
+          className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
+          style={{
+            lineHeight: "4rem",
+            fontFamily: "samurai",
+            borderRadius: "50%",
+            width: "4rem",
+            height: "4rem",
+          }}
+          onClick={spinWheel}
+          disabled={spinning}
+        >
+          Spin
+        </button>
+      </div>
+    </>
   );
 };
 

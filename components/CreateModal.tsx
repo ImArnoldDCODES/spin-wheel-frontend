@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-
+import useaxios from "../axios";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -9,6 +9,19 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const [title, setTitle] = useState("");
   const [items, setItems] = useState<string[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [giveawayId, setGiveawayId] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await useaxios
+        .post("/wheel", { title, items })
+        .then((res) => setGiveawayId(res.data.giveawayId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAddItem = () => {
     setItems([...items, ""]);
@@ -40,8 +53,6 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  console.log(title, items);
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div
@@ -49,13 +60,10 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         className="bg-white p-6 rounded-md shadow-lg max-w-md w-full"
       >
         <div className="flex">
-        <h2 className="text-xl mb-4 w-[fit-content]">Wheel Title</h2>
-        <button
-          onClick={onClose}
-          className="flex ml-auto text-red-500"
-        >
-          *Close
-        </button>
+          <h2 className="text-xl mb-4 w-[fit-content]">Wheel Title</h2>
+          <button onClick={onClose} className="flex ml-auto text-red-500">
+            *Close
+          </button>
         </div>
         <label className="block mb-2">
           Title:
@@ -83,6 +91,12 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           >
             Add Item
           </button>
+          <button onClick={handleSubmit}>Submit</button>
+          {giveawayId && 
+          <h1>
+            Copy Url: http://localhost:3000/play?id={giveawayId}
+          </h1>
+          }
         </div>
       </div>
     </div>
