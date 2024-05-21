@@ -3,7 +3,8 @@ import TransitionLink from "./TransitionLink";
 
 export default function Navbar() {
   return (
-    <main className="flex flex-col w-[30%] h-[full] bg-[#FFA500]">
+    <main className="flex flex-col h-[full] w-[20%] bg-[#FFA500]" 
+    >
       <div className="py-5 flex flex-col gap-5 align-center justify-center h-full w-full relative">
         <TransitionLink
           href="/admin/dashboard"

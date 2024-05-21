@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import useaxios from "../../../../axios";
 import Navbar from "../../../../components/Navbar";
 import { TableRow, User } from "../../../../interface/interface";
+import CreateModal from "../../../../components/CreateModal";
 
 export default function Index() {
   const [profile, setProfile] = useState<User | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tableData: TableRow[] = [
     { name: "$20 Wheel", date: "2024-05-17", number: 1 },
@@ -22,21 +24,33 @@ export default function Index() {
       .then((data) => setProfile(data.data));
   }, []);
 
-
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
       <Navbar />
-      <div className="w-[80%] h-[full]">
+      <div className="w-[80%] h-[full] relative">
+        <div className="flex">
+        <CreateModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+        </div>
         <div className="flex items-center justify-between my-5 px-8">
           <h1 className="text-[3rem] text-center">Dashboard</h1>
-          <h2 className="text-center">Welcome back, <span className="uppercase">{profile?.name}</span></h2>
+          <h2 className="text-center">
+            Welcome back, <span className="uppercase">{profile?.name}</span>
+          </h2>
         </div>
         <div className="ml-10 flex gap-10">
           <div className="rounded-lg pl-4 w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col">
             <h1 className="text-[3rem] font-bold">18</h1>
             <p className="text-[1.5rem] ml-2">Wheels</p>
           </div>
-          <div className="rounded-lg w-[12rem] h-[8rem] bg-[#F5F5F5]"></div>
+          <div
+            className="rounded-lg flex w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <h1 className="m-auto text-[2rem]">Create</h1>
+          </div>
           <div className="rounded-lg w-[12rem] h-[8rem] bg-[#F5F5F5]"></div>
         </div>
         <div className="p-10">
