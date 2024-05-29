@@ -18,7 +18,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
   const [selectedSegment, setSelectedSegment] = useState<number>();
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
   const segments = useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], []);
