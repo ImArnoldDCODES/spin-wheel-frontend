@@ -1,5 +1,5 @@
+import TransitionLink from "components/TransitionLink";
 import Image from "next/image";
-import TransitionLink from "../../components/TransitionLink";
 
 export default function Home() {
   return (

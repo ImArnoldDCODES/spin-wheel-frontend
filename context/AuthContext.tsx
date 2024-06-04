@@ -15,7 +15,9 @@ const AuthProvider: React.FC<ContextProviderProps> = ({ children }) => {
         email,
         password,
       })
-      .then((res) => localStorage.setItem("token", res.data.token));
+      .then((res: { data: { token: string } }) =>
+        localStorage.setItem("token", res.data.token)
+      );
     router.push("/admin/dashboard");
   };
 

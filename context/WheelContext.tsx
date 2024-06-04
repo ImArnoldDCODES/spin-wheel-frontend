@@ -13,7 +13,7 @@ const WheelProvider: React.FC<ContextProviderProps> = ({ children }) => {
         prize,
         giveawayId,
       })
-      .then((res) => localStorage.setItem("token", res.data.token));
+      .then((res: { data: { token: string } }) => localStorage.setItem("token", res.data.token));
   };
 
   return (

@@ -1,9 +1,9 @@
 "use client";
+import CreateModal from "components/CreateModal";
+import Navbar from "components/Navbar";
+import { TableRow, User } from "interface/interface";
 import { useEffect, useState } from "react";
 import useaxios from "../../../../axios";
-import Navbar from "../../../../components/Navbar";
-import { TableRow, User } from "../../../../interface/interface";
-import CreateModal from "../../../../components/CreateModal";
 
 export default function Index() {
   const [profile, setProfile] = useState<User | null>(null);

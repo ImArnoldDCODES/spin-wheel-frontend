@@ -1,7 +1,7 @@
 "use client";
+import TransitionLink from "components/TransitionLink";
+import { AuthContext } from "context/AuthContext";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
-import TransitionLink from "../../../components/TransitionLink";
 
 export default function Index() {
   const authContext = useContext(AuthContext);

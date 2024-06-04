@@ -1,7 +1,7 @@
 "use client";
+import TransitionLink from "components/TransitionLink";
+import SpinTheWheel from "components/Wheel";
 import { useState } from "react";
-import TransitionLink from "../../../components/TransitionLink";
-import SpinTheWheel from "../../../components/Wheel";
 
 export default function Index() {
   const [recents, setRecents] = useState<number[]>([]);
