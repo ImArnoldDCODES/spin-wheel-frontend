@@ -75,7 +75,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   }, [currentAngle, drawWheel]);
 
   const searchParams = useSearchParams();
-  const id = searchParams.get("id") || '';
+  const id = searchParams.get("id") || "";
 
   useEffect(() => {
     if (id) {
@@ -125,7 +125,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           (segments.length - finalAngle / anglePerSegment) % segments.length
         );
         setSelectedSegment(segments[segmentIndex]);
-        winner(name, segmentIndex.toString(), id);
+        id && winner(name, segmentIndex.toString(), id);
       }
     };
 
