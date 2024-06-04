@@ -1,12 +1,12 @@
 "use client";
-import { Key, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useaxios from "../../../../axios";
-import Navbar from "components/Navbar";
+import Navbar from "../../../../components/Navbar";
 import { TableRow, User } from "../../../../interface/interface";
 import CreateModal from "../../../../components/CreateModal";
 
 export default function Index() {
-  const [profile, setProfile] = useState<any[]>([]); // Initialize as an empty array
+  const [profile, setProfile] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tableData: TableRow[] = [
@@ -21,25 +21,18 @@ export default function Index() {
       .get("/profile", {
         headers: { Authorization: "Bearer " + token },
       })
-      .then((response: { data: SetStateAction<any[]> }) => {
-        setProfile(response.data);
-      })
-      .catch((error: any) => {
-        console.error("Error fetching profile:", error);
-      });
+      .then((data: { data: User}) => setProfile(data.data));
   }, []);
-
-  console.log(profile, "profile");
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
       <Navbar />
       <div className="w-[80%] h-[full] relative">
         <div className="flex">
-          <CreateModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
+        <CreateModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
         </div>
         <div className="flex items-center justify-between my-5 px-8">
           <h1 className="text-[3rem] text-center">Dashboard</h1>
@@ -94,47 +87,36 @@ export default function Index() {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(profile) && profile.length > 0 ? (
-                profile.map((res: any, index: Key | null | undefined) => (
-                  <tr key={index}>
-                    <td
-                      style={{
-                        borderBottom: "1px solid black",
-                        padding: "8px",
-                      }}
-                    >
-                      {res.giveaways.title}
-                    </td>
-                    <td
-                      style={{
-                        borderLeft: "1px solid black",
-                        borderBottom: "1px solid black",
-                        padding: "8px",
-                      }}
-                    >
-                      {res.giveaways.date}
-                    </td>
-                    <td
-                      style={{
-                        borderLeft: "1px solid black",
-                        borderBottom: "1px solid black",
-                        padding: "8px",
-                      }}
-                    >
-                      {res.giveaways.winner.length}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
+              {tableData.map((row, index) => (
+                <tr key={index}>
                   <td
-                    colSpan={3}
-                    style={{ padding: "8px", textAlign: "center" }}
+                    style={{
+                      borderBottom: "1px solid black",
+                      padding: "8px",
+                    }}
                   >
-                    No profiles available
+                    {row.name}
+                  </td>
+                  <td
+                    style={{
+                      borderLeft: "1px solid black",
+                      borderBottom: "1px solid black",
+                      padding: "8px",
+                    }}
+                  >
+                    {row.date}
+                  </td>
+                  <td
+                    style={{
+                      borderLeft: "1px solid black",
+                      borderBottom: "1px solid black",
+                      padding: "8px",
+                    }}
+                  >
+                    {row.number}
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>

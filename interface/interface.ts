@@ -4,8 +4,7 @@ export interface ContextProviderProps {
 }
 
 export interface User {
-  name: string,
-  
+  name: string,  
 }
 
 export interface AuthContextType {
