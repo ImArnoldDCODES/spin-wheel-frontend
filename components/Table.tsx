@@ -5,10 +5,11 @@ import { TableProps } from '@/interface/interface';
 const Table: React.FC<TableProps> = ({ headings, data }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const nbPerPage = 5;
+  const reversedData = [...data].reverse();
+  const numberOfPages = Math.ceil(reversedData.length / nbPerPage);
   const lastIndex = currentPage * nbPerPage;
   const startIndex = lastIndex - nbPerPage;
-  const numberOfPages = Math.ceil(data.length / nbPerPage);
-  const records = data.slice(startIndex, lastIndex);
+  const records = reversedData.slice(startIndex, lastIndex);
 
   return (
     <div>
