@@ -8,6 +8,7 @@ import React, {
   useContext,
 } from "react";
 import { WheelContext } from "../context/WheelContext";
+import { useRouter } from "next/navigation";
 
 interface ChildComponentProps {
   resData: (prop?: number) => void;
@@ -20,6 +21,8 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [selectedSegment, setSelectedSegment] = useState<number>();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
+
+  const router = useRouter()
 
   const segments = useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], []);
   const colors = useMemo(
@@ -131,6 +134,13 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
     requestAnimationFrame(animateSpin);
   };
+
+  useEffect(() => {
+    if (id && !spinning && selectedSegment) {
+      alert(`Congratulations you won ${selectedSegment}`);
+      router.push('/play')
+    }
+  });
 
   return (
     <>

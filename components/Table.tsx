@@ -24,7 +24,7 @@ const Table: React.FC<TableProps> = ({ headings, data }) => {
           {records.map((d, i) => (
             <tr key={i} className={`${i % 2 !== 0 && 'bg-gray-200'} text-syart capitalize cursor-pointer`}>
               <td>{d.title}</td>
-              <td>{d.date}</td>
+              <td>{d.date.slice(0, 10)}</td>
               <td>{d.winners.length}</td>
             </tr>
           ))}

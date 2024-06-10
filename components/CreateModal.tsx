@@ -62,7 +62,7 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         className="bg-white p-6 rounded-md shadow-lg max-w-md w-full"
       >
         <div className="flex">
-          <h2 className="text-xl mb-4 w-[fit-content]">Wheel Title</h2>
+          <h2 className="text-xl mb-4 w-[fit-content]">Wheel</h2>
           <button onClick={onClose} className="flex ml-auto text-red-500">
             *Close
           </button>
