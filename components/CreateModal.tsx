@@ -17,7 +17,9 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     try {
       await useaxios
         .post("/wheel", { title, items })
-        .then((res) => setGiveawayId(res.data.giveawayId));
+        .then((res: { data: { giveawayId: string } }) =>
+          setGiveawayId(res.data.giveawayId)
+        );
     } catch (error) {
       console.log(error);
     }
@@ -92,11 +94,9 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             Add Item
           </button>
           <button onClick={handleSubmit}>Submit</button>
-          {giveawayId && 
-          <h1>
-            Copy Url: http://localhost:3000/play?id={giveawayId}
-          </h1>
-          }
+          {giveawayId && (
+            <h1>Copy Url: http://localhost:3000/play?id={giveawayId}</h1>
+          )}
         </div>
       </div>
     </div>

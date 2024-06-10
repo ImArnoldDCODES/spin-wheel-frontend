@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { createContext } from "react";
+import React, { createContext, useRef } from "react";
 import useaxios from "../axios";
 import { AuthContextType, ContextProviderProps } from "../interface/interface";
 
@@ -15,8 +15,10 @@ const AuthProvider: React.FC<ContextProviderProps> = ({ children }) => {
         email,
         password,
       })
-      .then((res: { data: { token: string } }) =>
-        localStorage.setItem("token", res.data.token)
+      .then(
+        (res: { data: { token: string } }) => {
+          sessionStorage.setItem('token', res.data.token)
+        }
       );
     router.push("/admin/dashboard");
   };
@@ -38,3 +40,4 @@ const AuthProvider: React.FC<ContextProviderProps> = ({ children }) => {
 };
 
 export { AuthProvider, AuthContext };
+

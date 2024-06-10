@@ -7,7 +7,7 @@ import useaxios from "../../../../axios";
 
 export default function Index() {
   const [profile, setProfile] = useState<User | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const tableData: TableRow[] = [
     { name: "$20 Wheel", date: "2024-05-17", number: 1 },
@@ -15,24 +15,30 @@ export default function Index() {
     { name: "Twitter Giveaway", date: "2024-05-15", number: 3 },
   ];
 
+  const sessionToken = sessionStorage.getItem("token");
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     useaxios
       .get("/profile", {
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: `Bearer ${sessionToken}` },
       })
-      .then((data: { data: User}) => setProfile(data.data));
-  }, []);
+      .then((response: { data: { user: User } }) => {
+        setProfile(response.data.user);
+      })
+      .catch((error: any) => {
+        console.error("Error fetching profile", error);
+      });
+  }, [sessionToken]);
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
       <Navbar />
       <div className="w-[80%] h-[full] relative">
         <div className="flex">
-        <CreateModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+          <CreateModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
         </div>
         <div className="flex items-center justify-between my-5 px-8">
           <h1 className="text-[3rem] text-center">Dashboard</h1>
