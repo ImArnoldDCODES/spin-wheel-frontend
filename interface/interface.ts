@@ -4,9 +4,9 @@ export interface ContextProviderProps {
 }
 
 // user: Array<Object>
-interface Giveaway {
+export interface Giveaway {
   title: string;
-  date: string;  // ISO 8601 date string
+  date: string; 
   winners: string[];
   items: string[];
   _id: string;
@@ -28,8 +28,7 @@ export interface AuthContextType {
 export interface WheelContextType {
   winner: (name: string, prize: string, giveawayId: string) => void;
 }
-export interface TableRow {
-  name: string;
-  date: string;
-  number: number;
+export interface TableProps {
+  headings: string[];
+  data: Giveaway[];
 }
