@@ -22,7 +22,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   const segments = useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], []);
   const colors = useMemo(
@@ -84,7 +84,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     if (id) {
       setShowModal(true);
     }
-  }, []);
+  }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -138,7 +138,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   useEffect(() => {
     if (id && !spinning && selectedSegment) {
       alert(`Congratulations you won ${selectedSegment}`);
-      router.push('/play')
+      router.push("/play");
     }
   });
 
