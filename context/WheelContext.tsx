@@ -1,7 +1,7 @@
 "use client";
+import { ContextProviderProps, WheelContextType } from "interface/interface";
 import React, { createContext } from "react";
 import useaxios from "../axios";
-import { ContextProviderProps, WheelContextType } from "../interface/interface";
 
 const WheelContext = createContext<WheelContextType | null>(null);
 
@@ -22,3 +22,4 @@ const WheelProvider: React.FC<ContextProviderProps> = ({ children }) => {
 };
 
 export { WheelContext, WheelProvider };
+

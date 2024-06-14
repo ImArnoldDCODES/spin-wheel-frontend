@@ -11,12 +11,6 @@ export default function Navbar() {
           label="Dashboard"
           className="w-[80%] bg-[#fff] text-[1rem] hover:text-[#FF0000]"
         />
-        <TransitionLink
-          href="/admin/create"
-          label="Creare"
-          className="w-[80%] bg-[#fff] text-[1rem] hover:text-[#FF0000]"
-        />
-
       </div>
     </main>
   );

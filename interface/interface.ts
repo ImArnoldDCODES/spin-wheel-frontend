@@ -1,13 +1,11 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 export interface ContextProviderProps {
   children: ReactNode;
 }
-
-// user: Array<Object>
 export interface Giveaway {
   title: string;
-  date: string; 
-  winners: string[];
+  date: string;
+  winners: Array<object>;
   items: string[];
   _id: string;
 }
@@ -19,6 +17,25 @@ export interface User {
   giveaways: Giveaway[];
 }
 
+export interface Winner {
+  name?: string;
+  prize?: string;
+}
+
+export interface TableData {
+  title?: string;
+  date?: string;
+  winners?: string[];
+  items?: string[];
+  _id?: string;
+  name?: string;
+  prize?: string;
+}
+
+export interface TableProps {
+  headings: string[];
+  data: TableData[];
+}
 
 export interface AuthContextType {
   user?: User | null;
@@ -28,7 +45,7 @@ export interface AuthContextType {
 export interface WheelContextType {
   winner: (name: string, prize: string, giveawayId: string) => void;
 }
-export interface TableProps {
-  headings: string[];
-  data: Giveaway[];
+
+export interface ProfileContextType {
+  profile: User | any;
 }
