@@ -1,5 +1,5 @@
 "use client";
-import Table from "@/components/Table";
+import Table from "components/Table";
 import { ProfileContext } from "@/context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
