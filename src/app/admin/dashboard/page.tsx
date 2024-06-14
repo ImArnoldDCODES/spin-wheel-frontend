@@ -1,33 +1,19 @@
 "use client";
+import Table from "@/components/Table";
+import { ProfileContext } from "@/context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
-import { User, Giveaway } from "interface/interface";
-import { useEffect, useState } from "react";
-import Table from "@/components/Table";
-import useaxios from "../../../../axios";
+import { useContext, useState } from "react";
 
 export default function Index() {
-  const [profile, setProfile] = useState<User | null>(null);
-  const [giveList, setGivelist] = useState<Giveaway[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const headings = ["name", "date", "number of winners"];
+  const context = useContext(ProfileContext);
 
-  const sessionToken = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    useaxios
-      .get("/profile", {
-        headers: { Authorization: `Bearer ${sessionToken}` },
-      })
-      .then((response: { data: { user: User } }) => {
-        setProfile(response.data.user);
-        setGivelist(response.data.user.giveaways);
-      })
-      .catch((error: any) => {
-        console.error("Error fetching profile", error);
-      });
-  }, [sessionToken]);
+  if (!context) {
+    throw new Error("Profile must be within a ProfileProvider");
+  }
+  const { profile } = context;
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
@@ -47,7 +33,9 @@ export default function Index() {
         </div>
         <div className="ml-10 flex gap-10">
           <div className="rounded-lg pl-4 w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col">
-            <h1 className="text-[3rem] font-bold">{giveList.length}</h1>
+            <h1 className="text-[3rem] font-bold">
+              {profile?.giveaways.length}
+            </h1>
             <p className="text-[1.5rem] ml-2">Wheels</p>
           </div>
           <div
@@ -60,7 +48,7 @@ export default function Index() {
         </div>
         <div className="p-10">
           <h2 className="text-[2rem]">Recents</h2>
-          <Table headings={headings} data={giveList} />
+          <Table headings={headings} data={profile?.giveaways} />
         </div>
       </div>
     </main>

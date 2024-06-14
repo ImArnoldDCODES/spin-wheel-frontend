@@ -28,6 +28,10 @@ export interface AuthContextType {
 export interface WheelContextType {
   winner: (name: string, prize: string, giveawayId: string) => void;
 }
+
+export interface ProfileContextType {
+  profile: User | any;
+}
 export interface TableProps {
   headings: string[];
   data: Giveaway[];

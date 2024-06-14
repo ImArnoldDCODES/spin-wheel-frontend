@@ -1,8 +1,8 @@
 "use client";
+import { AuthContextType, ContextProviderProps } from "interface/interface";
 import { useRouter } from "next/navigation";
-import React, { createContext, useRef } from "react";
+import React, { createContext } from "react";
 import useaxios from "../axios";
-import { AuthContextType, ContextProviderProps } from "../interface/interface";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 

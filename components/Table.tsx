@@ -22,7 +22,7 @@ const Table: React.FC<TableProps> = ({ headings, data }) => {
           </tr>
         </thead>
         <tbody>
-          {records.map((d, i) => (
+          {records.map((d: any, i: any) => (
             <tr key={i} className={`${i % 2 !== 0 && 'bg-gray-200'} text-syart capitalize cursor-pointer`}>
               <td>{d.title}</td>
               <td>{d.date.slice(0, 10)}</td>

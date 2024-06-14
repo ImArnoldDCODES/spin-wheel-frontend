@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "context/AuthContext";
 import { WheelProvider } from "context/WheelContext";
+import { ProfileProvider } from "@/context/ProfileContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <WheelProvider>{children}</WheelProvider>
+          <WheelProvider>
+            <ProfileProvider>{children}</ProfileProvider>
+          </WheelProvider>
         </AuthProvider>
       </body>
     </html>
