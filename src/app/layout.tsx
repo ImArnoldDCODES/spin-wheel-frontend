@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <WheelProvider>
-            <ProfileProvider>{children}</ProfileProvider>
-          </WheelProvider>
+          <ProfileProvider>
+            <WheelProvider>{children}</WheelProvider>
+          </ProfileProvider>
         </AuthProvider>
       </body>
     </html>
