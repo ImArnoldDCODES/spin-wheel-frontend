@@ -34,7 +34,7 @@ export default function Index() {
         <div className="ml-10 flex gap-10">
           <div className="rounded-lg pl-4 w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col">
             <h1 className="text-[3rem] font-bold">
-              {profile?.giveaways.length}
+              {profile?.giveaways.length ?? 0}
             </h1>
             <p className="text-[1.5rem] ml-2">Wheels</p>
           </div>
@@ -48,7 +48,11 @@ export default function Index() {
         </div>
         <div className="p-10">
           <h2 className="text-[2rem]">Recents</h2>
-          <Table headings={headings} data={profile?.giveaways} />
+          {profile?.giveaways.length > 0 ? (
+            <Table headings={headings} data={profile.giveaways} />
+          ) : (
+            <div>No giveaways Available</div>
+          )}
         </div>
       </div>
     </main>

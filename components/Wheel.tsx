@@ -104,7 +104,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
     if (spinning) return;
     setSpinning(true);
-    setSelectedSegment(0);
+    // setSelectedSegment(0);
 
     let spinAngle = Math.random() * 2 * Math.PI + 10 * Math.PI;
     const spinDuration = 3000;
@@ -127,8 +127,9 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         const segmentIndex = Math.floor(
           (segments.length - finalAngle / anglePerSegment) % segments.length
         );
+
         setSelectedSegment(segments[segmentIndex]);
-        id && winner(name, segmentIndex.toString(), id);
+        id && winner(name, [segmentIndex + 1]?.toString(), id);
       }
     };
 
