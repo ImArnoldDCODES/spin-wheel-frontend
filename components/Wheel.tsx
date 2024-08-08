@@ -147,7 +147,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           segmentIndex += segments.length;
         }
 
-        const res = segments[segmentIndex]
+        const res = segments[segmentIndex];
 
         setSelectedSegment(res);
         console.log("Selected Segment:", res);
@@ -159,11 +159,18 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   };
 
   useEffect(() => {
-    if (id && !spinning && selectedSegment) {
-      alert(`Congratulations you won ${selectedSegment}`);
-      router.push("/play");
-    }
-  });
+    const interval = setInterval(() => {
+      if (id && !spinning && selectedSegment) {
+        alert(`Congratulations you won ${selectedSegment}`);
+
+        setTimeout(() => {
+          router.push("/play");
+        }, 0);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [spinning, selectedSegment]);
 
   return (
     <>
