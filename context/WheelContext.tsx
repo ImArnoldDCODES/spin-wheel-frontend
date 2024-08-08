@@ -8,7 +8,7 @@ const WheelContext = createContext<WheelContextType | null>(null);
 const WheelProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const winner = async (name: string, prize: string, giveawayId: string) => {
     await useaxios
-      .post("/winner", {
+      .patch("/winner", {
         name,
         prize,
         giveawayId,

@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { WheelContext } from "../context/WheelContext";
 import { useRouter } from "next/navigation";
+import useaxios from "../axios";
 
 interface ChildComponentProps {
   resData: (prop?: number) => void;
@@ -18,13 +19,22 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [currentAngle, setCurrentAngle] = useState<number>(0);
-  const [selectedSegment, setSelectedSegment] = useState<number>();
+  const [selectedSegment, setSelectedSegment] = useState<number | string>();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [segments, setSegements] = useState<Array<string>>([
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+  ]);
   const [name, setName] = useState<string>("");
 
   const router = useRouter();
 
-  const segments = useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8], []);
   const colors = useMemo(
     () => [
       "#FF5733",
@@ -67,7 +77,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       ctx.rotate(startAngle + anglePerSegment / 2);
       ctx.textAlign = "right";
       ctx.fillStyle = "#000";
-      ctx.font = "20px Arial";
+      ctx.font = "10px Arial";
       ctx.fillText(segment.toString(), radius - 10, 10);
       ctx.restore();
     });
@@ -83,6 +93,14 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   useEffect(() => {
     if (id) {
       setShowModal(true);
+      useaxios
+        .get(`/giveaways/${id}`)
+        .then((response: { data: { items: Array<string> } }) => {
+          setSegements(response.data.items);
+        })
+        .catch((err: string) => {
+          console.log(err);
+        });
     }
   }, [id]);
 
@@ -98,13 +116,9 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   }
 
   const { winner } = wheelContext;
-
   const spinWheel = () => {
-    resData(selectedSegment);
-
     if (spinning) return;
     setSpinning(true);
-    // setSelectedSegment(0);
 
     let spinAngle = Math.random() * 2 * Math.PI + 10 * Math.PI;
     const spinDuration = 3000;
@@ -123,13 +137,21 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         setCurrentAngle(finalAngle);
         setSpinning(false);
 
-        const anglePerSegment = (2 * Math.PI) / segments.length;
-        const segmentIndex = Math.floor(
-          (segments.length - finalAngle / anglePerSegment) % segments.length
-        );
+        console.log(finalAngle, "finalAngle");
 
-        setSelectedSegment(segments[segmentIndex]);
-        id && winner(name, [segmentIndex + 1]?.toString(), id);
+        const anglePerSegment = (2 * Math.PI) / segments.length;
+        let segmentIndex = Math.floor(finalAngle / anglePerSegment);
+
+        segmentIndex = segments.length - segmentIndex - 1;
+        if (segmentIndex < 0) {
+          segmentIndex += segments.length;
+        }
+
+        const res = segments[segmentIndex]
+
+        setSelectedSegment(res);
+        console.log("Selected Segment:", res);
+        id && winner(name, segments[segmentIndex], id);
       }
     };
 
