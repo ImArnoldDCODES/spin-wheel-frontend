@@ -168,7 +168,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         }, 0);
       }
     }, 1000);
-
+    
     return () => clearInterval(interval);
   }, [spinning, selectedSegment]);
 
