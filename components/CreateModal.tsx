@@ -53,7 +53,6 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
- 
 
   if (!isOpen) return null;
 
@@ -97,7 +96,12 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           </button>
           <button onClick={handleSubmit}>Submit</button>
           {giveawayId && (
-            <h1>Copy Url: http://localhost:3000/play?id={giveawayId}</h1>
+            <h1>
+              Copy URL:{" "}
+              {process.env.NODE_ENV === "development"
+                ? `http://localhost:3000/play?id=${giveawayId}`
+                : `https://spin-wheel-frontend.brimble.app/play?id=${giveawayId}`}
+            </h1>
           )}
         </div>
       </div>
