@@ -90,7 +90,18 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "";
 
+  const checkFormSubmission = () => {
+    const formSubmitted = localStorage.getItem(`formSubmitted_${id}`);
+    if (formSubmitted) {
+      alert("You have already submitted this form.");
+      setTimeout(() => {
+        router.push("/");
+      }, 1);
+    }
+  };
+
   useEffect(() => {
+    checkFormSubmission();
     if (id) {
       setShowModal(true);
       useaxios
@@ -161,6 +172,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (id && !spinning && selectedSegment) {
+        localStorage.setItem(`formSubmitted_${id}`, "true");
         alert(`Congratulations you won ${selectedSegment}`);
 
         clearInterval(interval);
