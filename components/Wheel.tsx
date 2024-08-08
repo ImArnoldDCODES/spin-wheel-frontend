@@ -163,13 +163,13 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       if (id && !spinning && selectedSegment) {
         alert(`Congratulations you won ${selectedSegment}`);
 
+        clearInterval(interval);
+
         setTimeout(() => {
           router.push("/play");
         }, 0);
       }
     }, 1000);
-    
-    return () => clearInterval(interval);
   }, [spinning, selectedSegment]);
 
   return (
