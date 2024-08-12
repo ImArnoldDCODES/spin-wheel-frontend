@@ -1,4 +1,5 @@
 import { useSearchParams } from "next/navigation";
+import { RiArrowLeftSFill } from "react-icons/ri";
 import React, {
   useCallback,
   useEffect,
@@ -163,6 +164,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         setSelectedSegment(res);
         console.log("Selected Segment:", res);
         id && winner(name, segments[segmentIndex], id);
+        resData(parseInt(res));
       }
     };
 
@@ -221,6 +223,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           ref={canvasRef}
           style={{ width: "100%", height: "100%" }}
         ></canvas>
+          <RiArrowLeftSFill className="ml-[41%] absolute" color="#000" size={50}/>
         <button
           className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
           style={{
