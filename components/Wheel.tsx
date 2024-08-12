@@ -149,8 +149,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         setCurrentAngle(finalAngle);
         setSpinning(false);
 
-        console.log(finalAngle, "finalAngle");
-
         const anglePerSegment = (2 * Math.PI) / segments.length;
         let segmentIndex = Math.floor(finalAngle / anglePerSegment);
 
@@ -162,7 +160,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         const res = segments[segmentIndex];
 
         setSelectedSegment(res);
-        console.log("Selected Segment:", res);
         id && winner(name, segments[segmentIndex], id);
         resData(parseInt(res));
       }
@@ -180,7 +177,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         clearInterval(interval);
 
         setTimeout(() => {
-          router.push("/play");
+          router.push("/");
         }, 0);
       }
     }, 1000);
