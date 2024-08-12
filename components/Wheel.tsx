@@ -114,6 +114,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -181,6 +182,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         }, 0);
       }
     }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spinning, selectedSegment]);
 
   return (
@@ -220,7 +222,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           ref={canvasRef}
           style={{ width: "100%", height: "100%" }}
         ></canvas>
-          <RiArrowLeftSFill className="ml-[41%] absolute" color="#000" size={50}/>
+        <RiArrowLeftSFill
+          className="ml-[41%] absolute"
+          color="#000"
+          size={50}
+        />
         <button
           className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
           style={{
