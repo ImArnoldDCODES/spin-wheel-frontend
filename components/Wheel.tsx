@@ -1,4 +1,5 @@
 import { useSearchParams } from "next/navigation";
+import { RiArrowLeftSFill } from "react-icons/ri";
 import React, {
   useCallback,
   useEffect,
@@ -113,6 +114,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -148,8 +150,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         setCurrentAngle(finalAngle);
         setSpinning(false);
 
-        console.log(finalAngle, "finalAngle");
-
         const anglePerSegment = (2 * Math.PI) / segments.length;
         let segmentIndex = Math.floor(finalAngle / anglePerSegment);
 
@@ -161,8 +161,8 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         const res = segments[segmentIndex];
 
         setSelectedSegment(res);
-        console.log("Selected Segment:", res);
         id && winner(name, segments[segmentIndex], id);
+        resData(parseInt(res));
       }
     };
 
@@ -178,10 +178,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         clearInterval(interval);
 
         setTimeout(() => {
-          router.push("/play");
+          router.push("/");
         }, 0);
       }
     }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spinning, selectedSegment]);
 
   return (
@@ -221,6 +222,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           ref={canvasRef}
           style={{ width: "100%", height: "100%" }}
         ></canvas>
+        <RiArrowLeftSFill
+          className="ml-[41%] absolute"
+          color="#000"
+          size={50}
+        />
         <button
           className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
           style={{
