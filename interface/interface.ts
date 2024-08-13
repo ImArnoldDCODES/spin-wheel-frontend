@@ -48,4 +48,5 @@ export interface WheelContextType {
 
 export interface ProfileContextType {
   profile: User | any;
+  profileFunction: () => void;
 }

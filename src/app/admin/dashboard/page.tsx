@@ -3,7 +3,7 @@ import Table from "components/Table";
 import { ProfileContext } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -13,7 +13,11 @@ export default function Index() {
   if (!context) {
     throw new Error("Profile must be within a ProfileProvider");
   }
-  const { profile } = context;
+  const { profile, profileFunction } = context;
+
+  useEffect(() => {
+    profileFunction()
+  })
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
