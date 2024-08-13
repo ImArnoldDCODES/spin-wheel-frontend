@@ -1,5 +1,9 @@
 "use client";
-import { ContextProviderProps, ProfileContextType, User } from "interface/interface";
+import {
+  ContextProviderProps,
+  ProfileContextType,
+  User,
+} from "interface/interface";
 import React, { createContext, useEffect, useState } from "react";
 import useaxios from "../axios";
 
@@ -8,7 +12,7 @@ const ProfileContext = createContext<ProfileContextType | null>(null);
 const ProfileProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [profile, setProfile] = useState<User | any>();
 
-  useEffect(() => {
+  const profileFunction = () => {
     const sessionToken = sessionStorage.getItem("token");
     if (sessionToken) {
       useaxios
@@ -22,14 +26,13 @@ const ProfileProvider: React.FC<ContextProviderProps> = ({ children }) => {
           console.error("Error fetching profile", error);
         });
     }
-  }, []);
+  };
 
   return (
-    <ProfileContext.Provider value={{ profile }}>
+    <ProfileContext.Provider value={{ profile, profileFunction }}>
       {children}
     </ProfileContext.Provider>
   );
 };
 
 export { ProfileContext, ProfileProvider };
-
