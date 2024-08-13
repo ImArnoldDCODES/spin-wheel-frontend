@@ -4,7 +4,7 @@ import {
   ProfileContextType,
   User,
 } from "interface/interface";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import useaxios from "../axios";
 
 const ProfileContext = createContext<ProfileContextType | null>(null);

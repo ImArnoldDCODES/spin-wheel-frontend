@@ -17,7 +17,7 @@ export default function Index() {
 
   useEffect(() => {
     profileFunction()
-  }, [])
+  })
 
   return (
     <main className="flex h-screen w-screen border-2 border-[#000]">
