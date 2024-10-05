@@ -20,38 +20,37 @@ export default function Index() {
   })
 
   return (
-    <main className="flex h-screen w-screen border-2 border-[#000]">
+    <main className="flex h-screen w-screen flex-col md:flex-row">
       <Navbar />
-      <div className="w-[80%] h-[full] relative">
+      <div className="w-full md:w-[80%] h-full relative">
         <div className="flex">
           <CreateModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           />
         </div>
-        <div className="flex items-center justify-between my-5 px-8">
-          <h1 className="text-[3rem] text-center">Dashboard</h1>
-          <h2 className="text-center">
+        <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
+          <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
+          <h2 className="text-center text-[1.5rem] md:text-[2rem] md:text-right">
             Welcome back, <span className="uppercase">{profile?.name}</span>
           </h2>
         </div>
-        <div className="ml-10 flex gap-10">
-          <div className="rounded-lg pl-4 w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col">
-            <h1 className="text-[3rem] font-bold">
+        <div className="ml-0 md:ml-10 flex flex-col md:flex-row gap-5 md:gap-10">
+          <div className="rounded-lg pl-4 w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col justify-center items-center lg:items-start">
+            <h1 className="text-[3.5rem] md:text-[3rem] font-bold">
               {profile?.giveaways.length ?? 0}
             </h1>
-            <p className="text-[1.5rem] ml-2">Wheels</p>
+            <p className="text-[1rem] md:text-[1.5rem] ml-2">Wheels</p>
           </div>
           <div
-            className="rounded-lg flex w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer"
+            className="rounded-lg flex w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer items-center justify-center"
             onClick={() => setIsModalOpen(true)}
           >
-            <h1 className="m-auto text-[2rem]">Create</h1>
+            <h1 className="m-auto text-[2.5rem] md:text-[2rem]">Create</h1>
           </div>
-          <div className="rounded-lg w-[12rem] h-[8rem] bg-[#F5F5F5]"></div>
         </div>
-        <div className="p-10">
-          <h2 className="text-[2rem]">Recents</h2>
+        <div className="p-4 md:p-10">
+          <h2 className="text-[1.5rem] md:text-[2rem]">Recents</h2>
           {profile?.giveaways.length > 0 ? (
             <Table headings={headings} data={profile.giveaways} />
           ) : (
