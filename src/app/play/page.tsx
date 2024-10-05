@@ -17,17 +17,17 @@ export default function Index() {
 
   return (
     <Suspense>
-      <main className="min-h-screen px-24 bg-[#FFA500]">
-        <div className="w-[fit-content] flex gap-5 mr-auto pt-[2rem]">
+      <main className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 bg-[#FFA500]">
+        <div className="w-full flex flex-col sm:flex-row gap-5 mr-auto pt-[2rem]">
           <TransitionLink
             href="/login"
             label="login"
-            className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[3rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
+            className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[2rem] sm:text-[3rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
           />
         </div>
-        <div className="flex flex-row items-center mt-24 justify-between">
-          <div className="max-w-[18rem] bg-[#FF4500] text-white rounded-lg px-5 py-5">
-            <h1 style={{ fontFamily: "samurai" }}>
+        <div className="flex flex-col lg:flex-row items-center mt-24 justify-between">
+          <div className="max-w-full sm:max-w-[18rem] bg-[#FF4500] text-white rounded-lg px-5 py-5">
+            <h1 className="text-sm sm:text-base md:text-lg" style={{ fontFamily: "samurai" }}>
               Step right up to the most thrilling game of chance on the web!
               Welcome to our Spin the Wheel website, where every spin holds the
               promise of exciting prizes and endless fun. Simply give the wheel
@@ -35,12 +35,12 @@ export default function Index() {
               prize with a satisfying click.{" "}
             </h1>
           </div>
-          <div>
+          <div className="flex-grow">
             <SpinTheWheel resData={handleRecent} />
           </div>
-          <div className="w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">
+          <div className="w-full sm:w-[fit-content] bg-[#FF4500] text-white rounded-lg px-5 py-5">
             <h1
-              className="uppercase underline text-[1.2rem]"
+              className="uppercase underline text-[1rem] sm:text-[1.2rem]"
               style={{ fontFamily: "wonder" }}
             >
               Recent
