@@ -27,7 +27,7 @@ export default function Index() {
           <CreateModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-          />
+          /> 
         </div>
         <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
           <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
