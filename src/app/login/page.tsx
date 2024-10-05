@@ -20,18 +20,18 @@ export default function Index() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FFA500] flex w-full">
-      <div className="w-[50%] h-[full]">
+    <main className="min-h-screen bg-[#FFA500] flex flex-col md:flex-row w-full">
+      <div className="w-full md:w-[50%] lg:h-screen flex items-center">
         <h1
-          className="text-[3rem] mt-[25%] p-10"
+          className="text-[2rem] md:text-[3rem] mt-[10%] p-10 text-center"
           style={{ fontFamily: "wonder" }}
         >
           Play with Friends <br /> and share prizes with people close to you🎉💖
         </h1>
       </div>
-      <div className="w-[50%] h-[full] bg-[#fff] flex flex-col p-10">
+      <div className="w-full md:w-[50%] lg:h-screen bg-[#fff] flex flex-col p-10 gap-y-10">
         <h1
-          className="text-[3rem] font-bold mt-[25%]"
+          className="text-[2rem] md:text-[3rem] font-bold mt-[10%] text-center"
           style={{ fontFamily: "samurai" }}
         >
           Sign In
@@ -65,7 +65,7 @@ export default function Index() {
           >
             Sign In
           </button>
-          <p>
+          <p className="text-center">
             Don&apos;t have an account? {' '}
             <TransitionLink
               href="/signup"
