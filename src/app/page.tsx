@@ -1,71 +1,50 @@
+"use client";
 import TransitionLink from "components/TransitionLink";
 import Image from "next/image";
+import * as React from "react";
+import { MdOutlineQuestionMark } from "react-icons/md";
+import SpinTheWheel from "@/components/Wheel";
 
 export default function Home() {
+  const [recents, setRecents] = React.useState<number[]>([]);
+
+  const handleRecent = (prop: number | undefined) => {
+    if (prop !== undefined) {
+      setRecents((prevArray: number[]) => {
+        const newData = [...prevArray, prop];
+        return newData;
+      });
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 bg-[#FFA500]">
-      <svg viewBox="0 0 500 110" className="z-[1] mt-[-7rem] hidden lg:block">
-        <path
-          fill="transparent"
-          id="curve"
-          d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"
-        />
-        <text width="300" fill="#fff">
-          <textPath
-            xlinkHref="#curve"
-            startOffset="50%"
-            textAnchor="middle"
-            className="uppercase text-[3rem] font-bold"
-            style={{ fontFamily: "wonder" }}
-          >
-            Spin-The-Wheel
-          </textPath>
-        </text>
-      </svg>
-      <svg
-        viewBox="0 0 500 200"
-        className="z-[1] block lg:hidden w-[22rem] md:w-[40rem]"
-      >
-        <path
-          fill="transparent"
-          id="curve"
-          d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"
-        />
-        <text width="300" fill="#fff">
-          <textPath
-            xlinkHref="#curve"
-            startOffset="50%"
-            textAnchor="middle"
-            className="uppercase text-[4.3rem] font-bold"
-            style={{ fontFamily: "wonder" }}
-          >
-            Spin-The-Wheel
-          </textPath>
-        </text>
-      </svg>
-      <Image
-        src="/wheel.png"
-        alt="wheel"
-        width={100}
-        height={100}
-        unoptimized
-        priority
-        style={{ maxWidth: "none" }}
-        className="h-[30rem] w-[30rem] mt-[-5rem] z-[2] md:w-[30rem] md:h-[30rem] lg:mt-[-8rem]"
-      />
-      <TransitionLink
-        href="/play"
-        label="play"
-        className="uppercase bg-[#FFD700] z-[3] px-4 rounded-lg text-[3rem] mt-[auto] font-bold hover:bg-[#FF0000] hover:text-white"
-      />
-      <Image
-        src="/leaf-vector.png"
-        alt="wheel"
-        width={100}
-        height={100}
-        unoptimized
-        className="right-0 top-0 md:w-[20rem] z-[1] absolute"
-      />
+    <main className="bg-bgcream h-screen px-12 relative flex flex-col border-2 border-[#000]">
+      <section className="flex items-center justify-between pt-5 h-fit">
+        <div className="flex items-center gap-5">
+          <div className="cursor-pointer h-14 w-14 rounded-full bg-cream flex justify-center items-center">
+            <MdOutlineQuestionMark size={20} />
+          </div>
+          <div className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+        <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full">
+          <h1>Made by Arnold</h1>
+        </div>
+      </section>
+      <section className="h-full flex flex-col w-[45rem] m-auto items-center">
+        <div className="h-fit w-fit mx-auto">
+          <SpinTheWheel resData={handleRecent} />
+        </div>
+        <div className="text-dark flex gap-5 items-center mt-8">
+          <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream font-cooper">
+            Login
+          </button>
+          <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-yellow font-cooper">
+            Recent
+          </button>
+        </div>
+      </section>
     </main>
   );
 }

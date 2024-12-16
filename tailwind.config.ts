@@ -8,6 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "bgcream": "#F6F4E8",
+        "cream": "#FFFBE5",
+        "gray": "#37353280",
+        "dark": "#373532",
+        "yellow": "#EFCB3B"
+      },
+      fontFamily: {
+        "cooper": ["Cooper", "Poppins"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

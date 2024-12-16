@@ -12,6 +12,11 @@
   src: url("/samurai-blast-font/SamuraiBlast-YznGj.ttf")
     format("truetype");
 }
+@font-face {
+  font-family: "Cooper";
+  src: url("/COOPBL.TTF")
+    format("truetype");
+}
 
 body::-webkit-scrollbar {
   width: 0;
