@@ -17,6 +17,8 @@ const config: Config = {
       },
       fontFamily: {
         "cooper": ["Cooper", "Poppins"],
+        "samurai": ["Samurai", "Poppins"],
+        "wonder": ["Wonder", "Poppins"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

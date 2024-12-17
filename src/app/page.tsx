@@ -25,7 +25,7 @@ export default function Home() {
             <MdOutlineQuestionMark size={20} />
           </div>
           <div className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper">
-            <h1>Dashboard</h1>
+            <TransitionLink href="/admin/dashboard" label="Dashboard" />
           </div>
         </div>
         <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full">
@@ -38,7 +38,7 @@ export default function Home() {
         </div>
         <div className="text-dark flex gap-5 items-center mt-8">
           <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream font-cooper">
-            Login
+            <TransitionLink href="/login" label="Login" />
           </button>
           <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-yellow font-cooper">
             Recent

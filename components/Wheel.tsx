@@ -38,14 +38,14 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
   const colors = useMemo(
     () => [
-      "#FF5733",
-      "#33FF57",
-      "#3357FF",
-      "#F3FF33",
-      "#FF33A6",
-      "#33FFF5",
-      "#8D33FF",
-      "#FF8D33",
+      "#D45A5A",
+      "#EFCB3B",
+      "#474747",
+      "#B4DAC7",
+      "#9FB5AA",
+      "#D45A5A",
+      "#EFCB3B",
+      "#474747",
     ],
     []
   );

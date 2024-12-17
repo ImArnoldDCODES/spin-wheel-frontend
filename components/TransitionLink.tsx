@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { animatePageOut } from "../animations";
+import * as React from "react"
 
 export default function TransitionLink({
   href,
@@ -9,8 +10,8 @@ export default function TransitionLink({
   className,
 }: {
   href: string;
-  label: string;
-  className: string;
+  label?: string;
+  className?: string;
 }) {
   const router = useRouter();
   const handleClick = () => {
@@ -21,7 +22,7 @@ export default function TransitionLink({
     <button
       className={className}
       onClick={handleClick}
-      style={{ fontFamily: "wonder" }}
+      // style={{ fontFamily: "wonder" }}
     >
       {label}
     </button>
