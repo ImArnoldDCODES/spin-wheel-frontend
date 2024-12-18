@@ -1,6 +1,7 @@
 "use client";
 import TransitionLink from "components/TransitionLink";
 import { AuthContext } from "context/AuthContext";
+import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { MdOutlineQuestionMark } from "react-icons/md";
 
@@ -37,9 +38,7 @@ export default function Index() {
       </section>
       <section className="flex flex-col items-center mt-20">
         <form action="" className="flex flex-col">
-          <label className="font-semibold font-cooper text-lg">
-            Full Name
-          </label>
+          <label className="font-semibold font-cooper text-lg">Full Name</label>
           <input
             type="fullname"
             name="Fullname"
@@ -70,11 +69,12 @@ export default function Index() {
 
           <p className="text-center text-md my-5 font-cooper w-fit">
             Already have an account? {""}
-            <TransitionLink
-              href="/login"
-              label="Sign In"
+            <Link
+              href={"/login"}
               className="uppercase text-yellow text-sm hover:text-white hover:bg-yellow px-2 py-2 rounded-full"
-            />
+            >
+              Sign In
+            </Link>
           </p>
         </form>
         <div className="cursor-pointer bg-yellow text-dark font-cooper w-fit py-3 px-16 rounded-full text-xl">

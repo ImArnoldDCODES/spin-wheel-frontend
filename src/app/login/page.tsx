@@ -1,6 +1,7 @@
 "use client";
 import TransitionLink from "components/TransitionLink";
 import { AuthContext } from "context/AuthContext";
+import Link from "next/link";
 import { useContext, useState } from "react";
 import { MdOutlineQuestionMark } from "react-icons/md";
 
@@ -60,11 +61,9 @@ export default function Index() {
 
           <p className="text-center text-md my-5 font-cooper w-fit">
             Don&apos;t have an account?{" "}
-            <TransitionLink
-              href="/signup"
-              label="Create Account"
-              className="uppercase text-yellow text-sm hover:text-white hover:bg-yellow px-2 py-2 rounded-full"
-            />
+            <Link href={"/signup"} className="uppercase text-yellow text-sm hover:text-white hover:bg-yellow px-2 py-2 rounded-full">
+            Create Account 
+            </Link>
           </p>
         </form>
         <div className="cursor-pointer bg-yellow text-dark font-cooper w-fit py-3 px-16 rounded-full text-xl">
