@@ -17,7 +17,7 @@ export default function Index() {
 
   useEffect(() => {
     profileFunction()
-  })
+  }, [])
 
   return (
     <main className="flex h-screen w-screen flex-col md:flex-row">
