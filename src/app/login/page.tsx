@@ -21,7 +21,7 @@ export default function Index() {
   };
 
   return (
-    <main className="bg-bgcream h-screen px-12 pt-5 relative flex flex-col">
+    <main className="bg-bgcream h-screen relative flex flex-col">
       <NavContent />
       <section className="flex flex-col items-center mt-20">
         <form action="" className="flex flex-col" onSubmit={handleSubmit}>

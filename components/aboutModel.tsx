@@ -15,7 +15,7 @@ const AboutModel: React.FC<AboutModal> = ({ isOpen, setIsOpen }) => {
     <div className="">
       {isOpen && (
         <main
-          className={"flex items-center align-middle justify-center h-full w-full absolute bg-[#FFFBE5] bg-opacity-40 shadow-2xl z-20 transition-opacity duration-300 ease-in-out"}
+          className={"flex items-center align-middle justify-center h-full w-full absolute bg-[#F6F4E8] bg-opacity-40 shadow-2xl z-20 transition-opacity duration-300 ease-in-out"}
           id="modal-container"
           onClick={handleClickOutside}
         >
