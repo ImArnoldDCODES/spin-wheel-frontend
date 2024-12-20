@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className="h-screen relative">
-      <main className="bg-[url('/background.jpeg')] h-screen flex flex-col">
+      <main className="bg-[url('/background.jpeg')] bg-center bg-no-repeat bg-cover h-screen flex flex-col">
         <NavContent />
         <section className="h-full flex flex-col w-[45rem] m-auto items-center">
           <div className="h-fit w-fit mx-auto">
