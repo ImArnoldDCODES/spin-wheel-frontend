@@ -3,6 +3,7 @@ import NavContent from "@/components/NavContent";
 import { AuthContext } from "context/AuthContext";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
+import Image from "next/image";
 
 export default function Index() {
   const authContext = useContext(AuthContext);
@@ -21,52 +22,95 @@ export default function Index() {
   };
 
   return (
-    <main className="bg-bgcream h-screen relative flex flex-col">
+   <main className="bg-bgcream h-screen relative flex flex-col">
+      <div className="absolute bottom-0 flex justify-between w-full z-[1]">
+        <Image
+          src={"/pie-1.png"}
+          alt="first pie"
+          width={200}
+          height={200}
+          className="rotate-90"
+        />
+        <Image
+          src={"/pie-2.png"}
+          alt="first pie"
+          width={200}
+          height={200}
+          className="-rotate-90"
+        />
+      </div>
       <NavContent />
-      <section className="flex flex-col items-center mt-20">
-        <form action="" className="flex flex-col">
-          <label className="font-semibold font-cooper text-lg">Full Name</label>
+      <section className="flex flex-col items-center z-[2]">
+        <form
+          action=""
+          className="flex flex-col rounded-xl border-2 border-moondark border-opacity-30 bg-[#E8E5D4] p-10"
+          onSubmit={handleSubmit}
+        >
           <input
-            type="fullname"
-            name="Fullname"
-            id="Fullname"
-            className="autofill:bg-black outline-none border-0 bg-white rounded-full w-[20rem] text-sm h-10 pl-2 mt-2 font-medium"
+            type="name"
+            name="name"
+            id="name"
+            placeholder="Name"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium font-cooper pl-2 text-moondark placeholder:text-[#47474780]"
             onChange={(e) => setName(e.target.value)}
           />
-          <label className="font-semibold font-cooper text-lg mt-5">
-            Email Address
-          </label>
           <input
             type="email"
             name="email"
             id="email"
-            className="autofill:bg-black outline-none border-0 bg-white rounded-full w-[20rem] text-sm h-10 pl-2 mt-2 font-medium"
+            placeholder="Email"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium font-cooper pl-2 text-moondark mt-4 placeholder:text-[#47474780]"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label className="font-semibold font-cooper text-lg mt-5">
-            Password
-          </label>
           <input
             type="password"
             name="password"
             id="password"
-            className=" outline-none border-0 bg-white rounded-full w-[20rem] text-sm h-10 pl-2 mt-2 font-medium"
+            placeholder="Password"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium font-cooper pl-2 text-moondark mt-4 placeholder:text-[#47474780]"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Confirm Password"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium  font-cooper pl-2 text-moondark mt-4 placeholder:text-[#47474780]"
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <p className="text-center text-md my-5 font-cooper w-fit">
-            Already have an account? {""}
-            <Link
-              href={"/login"}
-              className="uppercase text-yellow text-sm hover:text-white hover:bg-yellow px-2 py-2 rounded-full"
-            >
-              Sign In
-            </Link>
-          </p>
+          <button
+            className="cursor-pointer hover:bg-gray bg-moondark text-white font-cooper w-full mt-10 py-2 px-16 rounded-full text-xl mx-auto"
+            onClick={(e) => handleSubmit}
+          >
+            Sign Up
+          </button>
+
+          <div className="mt-5 flex align-middle items-center text-center justify-center gap-2">
+            <div className="w-32 h-[2px] bg-gradient-to-r from-[#E8E5D4] from-[5%] via-[#474747] via-[100%] to-[#47474700] to-[100%]"></div>
+            <h1 className="text-[#000] opacity-20 font-bold text-2xl font-cooper">
+              Or
+            </h1>
+            <div className="w-32 h-[2px] bg-gradient-to-l from-[#E8E5D4] from-[5%] via-[#474747] via-[100%] to-[#47474700] to-[100%]"></div>
+          </div>
+
+          <button
+            className="cursor-pointer bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-16 rounded-full text-lg mx-auto"
+            style={{ boxShadow: "inset 0 4px 12px #47474740" }}
+            onClick={(e) => handleSubmit}
+          >
+            Sign Up With Google
+          </button>
         </form>
-        <div className="cursor-pointer bg-yellow text-dark font-cooper w-fit py-3 px-16 rounded-full text-xl">
-          <h1>SignUp</h1>
-        </div>
+        <p className="text-center text-md my-5 font-cooper w-fit">
+          Already have an account?{" "}
+          <Link
+            href={"/login"}
+            className="text-gray text-sm underline cursor-pointer"
+          >
+            Sign In
+          </Link>
+        </p>
       </section>
     </main>
     // <main className="min-h-screen bg-[#FFA500] flex flex-col md:flex-row w-full">

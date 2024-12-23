@@ -30,6 +30,11 @@
     src: url("/COOPBL.TTF") format("truetype");
   }
 
+  @font-face {
+    font-family: "Century";
+    src: url("/CenturyBold.ttf") format("truetype");
+  }
+
   body::-webkit-scrollbar {
     width: 0;
   } 

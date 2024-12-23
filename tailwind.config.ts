@@ -14,11 +14,13 @@ const config: Config = {
         gray: "#37353280",
         dark: "#373532",
         yellow: "#EFCB3B",
+        moondark: "#474747" 
       },
       fontFamily: {
         cooper: ["Cooper", "Poppins"],
         samurai: ["Samurai", "Poppins"],
         wonder: ["Wonder", "Poppins"],
+        century: ["Century", "Poppins"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

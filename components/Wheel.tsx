@@ -228,10 +228,10 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           size={50}
         />
         <button
-          className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
+          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute "
           style={{
             lineHeight: "4rem",
-            fontFamily: "samurai",
+            // fontFamily: "century",
             borderRadius: "50%",
             width: "4rem",
             height: "4rem",
