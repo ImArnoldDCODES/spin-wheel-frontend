@@ -4,11 +4,13 @@ import { ProfileContext } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
 import { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const headings = ["name", "date", "number of winners"];
   const context = useContext(ProfileContext);
+  const router = useRouter();
 
   if (!context) {
     throw new Error("Profile must be within a ProfileProvider");
@@ -16,8 +18,11 @@ export default function Index() {
   const { profile, profileFunction } = context;
 
   useEffect(() => {
-    profileFunction()
-  }, [])
+    if (!profile) {
+      router.push("/login");
+    }
+    profileFunction();
+  }, [profile]);
 
   return (
     <main className="flex h-screen w-screen flex-col md:flex-row">
@@ -27,7 +32,7 @@ export default function Index() {
           <CreateModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-          /> 
+          />
         </div>
         <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
           <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>

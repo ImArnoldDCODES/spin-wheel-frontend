@@ -22,7 +22,7 @@ export default function Index() {
   };
 
   return (
-   <main className="bg-bgcream h-screen relative flex flex-col">
+    <main className="bg-bgcream h-screen relative flex flex-col">
       <div className="absolute bottom-0 flex justify-between w-full z-[1]">
         <Image
           src={"/pie-1.png"}
@@ -88,7 +88,10 @@ export default function Index() {
 
           <div className="mt-5 flex align-middle items-center text-center justify-center gap-2">
             <div className="w-32 h-[2px] bg-gradient-to-r from-[#E8E5D4] from-[5%] via-[#474747] via-[100%] to-[#47474700] to-[100%]"></div>
-            <h1 className="text-[#000] opacity-20 font-bold text-2xl font-cooper">
+            <h1
+              className="text-[#E8E5D4] font-bold text-2xl font-cooper"
+              style={{ textShadow: "2px 2px 5px rgba(0, 0, 0, 0.5)" }}
+            >
               Or
             </h1>
             <div className="w-32 h-[2px] bg-gradient-to-l from-[#E8E5D4] from-[5%] via-[#474747] via-[100%] to-[#47474700] to-[100%]"></div>
@@ -97,7 +100,7 @@ export default function Index() {
           <button
             className="cursor-pointer bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-16 rounded-full text-lg mx-auto"
             style={{ boxShadow: "inset 0 4px 12px #47474740" }}
-            onClick={(e) => handleSubmit}
+            // onClick={(e) => handleSubmit}
           >
             Sign Up With Google
           </button>
