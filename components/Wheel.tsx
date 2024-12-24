@@ -211,11 +211,13 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       <div
         className="relative"
         style={{
-          width: `${remSize * 3}rem`,
+          // width: `${remSize * 3}rem`,
+          width: "100%",
           height: `${remSize * 2}rem`,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          // border: "2px solid red"
         }}
       >
         <canvas

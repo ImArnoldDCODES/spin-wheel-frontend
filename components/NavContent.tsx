@@ -21,7 +21,7 @@ const NavContent = () => {
             <TransitionLink href="/admin/dashboard" label="Dashboard" />
           </div>
         </div>
-        <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full">
+        <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full hidden sm:flex">
           <h1>Made by Arnold</h1>
         </div>
       </section>

@@ -29,21 +29,21 @@ export default function Index() {
           alt="first pie"
           width={200}
           height={200}
-          className="rotate-90"
+          className="rotate-90 hidden sm:block"
         />
         <Image
           src={"/pie-2.png"}
           alt="first pie"
           width={200}
           height={200}
-          className="-rotate-90"
+          className="-rotate-90 ml-auto sm:ml-0"
         />
       </div>
       <NavContent />
-      <section className="flex flex-col items-center mt-10 z-[2]">
+      <section className="flex flex-col items-center mt-10 z-[2] px-4">
         <form
           action=""
-          className="flex flex-col rounded-xl border-2 border-moondark border-opacity-30 bg-[#E8E5D4] px-10 py-12"
+          className="flex flex-col rounded-xl border-2 border-moondark border-opacity-30 bg-[#E8E5D4] sm:px-10 px-8 py-12 sm:w-fit w-full"
           onSubmit={handleSubmit}
         >
           <input
@@ -51,7 +51,7 @@ export default function Index() {
             name="email"
             id="email"
             placeholder="Email"
-            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium font-cooper pl-2 text-moondark placeholder:text-[#47474780]"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 text-sm h-10 font-medium font-cooper pl-2 text-moondark placeholder:text-[#47474780]"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
@@ -59,7 +59,7 @@ export default function Index() {
             name="password"
             id="password"
             placeholder="Password"
-            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 w-[20rem] text-sm h-10 font-medium mt-5 font-cooper pl-2 text-moondark placeholder:text-[#47474780]"
+            className="outline-none bg-transparent border-b-[1px] border-[#000] border-opacity-25 text-sm h-10 font-medium mt-5 font-cooper pl-2 text-moondark placeholder:text-[#47474780]"
             onChange={(e) => setPassword(e.target.value)}
           />
 
@@ -82,7 +82,7 @@ export default function Index() {
           </div>
 
           <button
-            className="cursor-pointer bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-16 rounded-full text-lg mx-auto"
+            className="cursor-pointer bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-5 sm:px-16 rounded-full text-lg mx-auto"
             style={{ boxShadow: "inset 0 4px 12px #47474740" }}
             // onClick={(e) => handleSubmit}
           >

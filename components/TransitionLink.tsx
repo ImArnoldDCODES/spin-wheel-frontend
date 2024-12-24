@@ -19,12 +19,12 @@ export default function TransitionLink({
   };
 
   return (
-    <button
+    <div
       className={className}
       onClick={handleClick}
       // style={{ fontFamily: "wonder" }}
     >
       {label}
-    </button>
+    </div>
   );
 }
