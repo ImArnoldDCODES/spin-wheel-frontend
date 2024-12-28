@@ -22,6 +22,7 @@ export default function Index() {
       router.push("/login");
     }
     profileFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile]);
 
   return (
