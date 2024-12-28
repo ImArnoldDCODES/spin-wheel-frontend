@@ -20,7 +20,7 @@ const AboutModel: React.FC<AboutModal> = ({ isOpen, setIsOpen }) => {
           onClick={handleClickOutside}
         >
           <div
-            className={"bg-[#FFFBE5] shadow-lg rounded-xl w-[30rem] h-[35rem] px-12 py-8 flex flex-col transform transition-transform duration-300 ease-in-out"}
+            className={"bg-[#FFFBE5] shadow-lg rounded-xl sm:w-[30rem] sm:h-[35rem] sm:px-12 sm:py-8  mx-5 sm:mx-0 py-5 px-4 flex flex-col transform transition-transform duration-300 ease-in-out"}
             onClick={(e) => e.stopPropagation()} 
           >
             <h3 className="text-dark text-2xl font-cooper">
@@ -31,7 +31,7 @@ const AboutModel: React.FC<AboutModal> = ({ isOpen, setIsOpen }) => {
               prize with a satisfying click.
             </h3>
 
-            <div className="mt-auto ml-auto text-2xl font-cooper text-gray">
+            <div className="sm:mt-auto mt-5 ml-auto text-2xl font-cooper text-gray">
               <h5>Developed by Arnold</h5>
               <h5>Designed by lekandev</h5>
             </div>
