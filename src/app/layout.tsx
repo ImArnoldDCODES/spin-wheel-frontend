@@ -19,7 +19,9 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <ProfileProvider>
-            <WheelProvider>{children}</WheelProvider>
+            <WheelProvider>
+              {children}
+              </WheelProvider>
           </ProfileProvider>
         </AuthProvider>
       </body>

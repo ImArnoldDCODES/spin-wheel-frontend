@@ -38,14 +38,14 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
   const colors = useMemo(
     () => [
-      "#FF5733",
-      "#33FF57",
-      "#3357FF",
-      "#F3FF33",
-      "#FF33A6",
-      "#33FFF5",
-      "#8D33FF",
-      "#FF8D33",
+      "#D45A5A",
+      "#EFCB3B",
+      "#474747",
+      "#B4DAC7",
+      "#9FB5AA",
+      "#D45A5A",
+      "#EFCB3B",
+      "#474747",
     ],
     []
   );
@@ -211,11 +211,13 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       <div
         className="relative"
         style={{
-          width: `${remSize * 3}rem`,
+          // width: `${remSize * 3}rem`,
+          width: "100%",
           height: `${remSize * 2}rem`,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          // border: "2px solid red"
         }}
       >
         <canvas
@@ -228,10 +230,10 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           size={50}
         />
         <button
-          className="bg-[#FFD700] text-center uppercase bold cursor-pointer absolute"
+          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute "
           style={{
             lineHeight: "4rem",
-            fontFamily: "samurai",
+            // fontFamily: "century",
             borderRadius: "50%",
             width: "4rem",
             height: "4rem",
