@@ -15,8 +15,6 @@ export default function Index() {
   }
 
   const { login } = authContext;
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
 
   const initialValues = {
     email: "",
@@ -43,12 +41,6 @@ export default function Index() {
       setSubmitting(false);
     }
   };
-
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const { email, password } = formData;
-  //   await login(email, password);
-  // };
 
   return (
     <main className="bg-bgcream h-screen relative flex flex-col">

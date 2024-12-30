@@ -18,12 +18,12 @@ export default function Index() {
   const { profile, profileFunction } = context;
 
   useEffect(() => {
-    if (!profile) {
-      router.push("/login");
+    profileFunction()
+
+    if(profile === null){
+      router.push("/login")
     }
-    profileFunction();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profile]);
+  }, []);
 
   return (
     <main className="flex h-screen w-screen flex-col md:flex-row">
