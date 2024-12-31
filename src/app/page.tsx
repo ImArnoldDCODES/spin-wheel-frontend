@@ -6,12 +6,12 @@ import * as React from "react";
 
 export default function Home() {
   const [recents, setRecents] = React.useState<number[]>([]);
-  const [modal, setModal] = React.useState<boolean>(false)
+  const [modal, setModal] = React.useState<boolean>(false);
 
   const handleRecent = (prop: number | undefined) => {
     if (prop !== undefined) {
       setRecents((prevArray: number[]) => {
-        const newData = [...prevArray, prop];
+        const newData = [prop, ...prevArray];
         return newData;
       });
     }
@@ -29,11 +29,31 @@ export default function Home() {
             <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream font-cooper">
               <TransitionLink href="/login" label="Login" />
             </button>
-            <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-yellow font-cooper">
+            <button
+              className="cursor-pointer w-fit py-4 px-10 rounded-full bg-yellow font-cooper"
+              onClick={() => setModal(!modal)}
+            >
               Recent
             </button>
           </div>
         </section>
+        {modal && (
+          <div className="w-80 h-80 bg-gray-50 rounded-tl-xl shadow-xl absolute bottom-0 right-0 p-4">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 font-cooper">Recent</h2>
+            <div className="overflow-y-auto h-[calc(100%-4rem)]">
+              <ul className="space-y-2">
+                {recents.map((number, index) => (
+                  <li
+                    key={index}
+                    className="p-3 bg-white rounded-lg shadow-sm text-gray-700 font-cooper"
+                  >
+                    {number}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </main>
     </main>
   );

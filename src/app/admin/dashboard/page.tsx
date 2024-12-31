@@ -18,12 +18,16 @@ export default function Index() {
   const { profile, profileFunction } = context;
 
   useEffect(() => {
-    profileFunction()
+    profileFunction();
 
-    if(profile === null){
-      router.push("/login")
-    }
-  }, []);
+    const timer = setTimeout(() => {
+      if (!profile) {
+        router.push("/login");
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [profile]);
 
   return (
     <main className="flex h-screen w-screen flex-col md:flex-row">

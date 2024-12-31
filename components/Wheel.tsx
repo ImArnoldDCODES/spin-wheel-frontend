@@ -11,6 +11,7 @@ import React, {
 import { WheelContext } from "../context/WheelContext";
 import { useRouter } from "next/navigation";
 import useaxios from "../axios";
+import Image from "next/image"
 
 interface ChildComponentProps {
   resData: (prop?: number) => void;
@@ -217,17 +218,23 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          // border: "2px solid red"
         }}
       >
         <canvas
           ref={canvasRef}
           style={{ width: "100%", height: "100%" }}
         ></canvas>
-        <RiArrowLeftSFill
+        {/* <RiArrowLeftSFill
           className="ml-[41%] absolute"
           color="#000"
           size={50}
+        /> */}
+         <Image
+          src={"/arrow.png"}
+          alt="arrow"
+          width={30}
+          height={20}
+          className="ml-[40%] absolute rotate-90"
         />
         <button
           className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute "

@@ -17,9 +17,11 @@ const NavContent = () => {
           >
             <MdOutlineQuestionMark size={20} />
           </div>
-          <div className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper">
-            <TransitionLink href="/admin/dashboard" label="Dashboard" />
-          </div>
+            <TransitionLink
+              href="/admin/dashboard"
+              label="Dashboard"
+              className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper"
+            />
         </div>
         <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full hidden sm:flex">
           <h1>Made by Arnold</h1>
