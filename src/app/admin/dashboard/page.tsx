@@ -18,11 +18,15 @@ export default function Index() {
   const { profile, profileFunction } = context;
 
   useEffect(() => {
-    if (!profile) {
-      router.push("/login");
-    }
     profileFunction();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    const timer = setTimeout(() => {
+      if (!profile) {
+        router.push("/login");
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [profile]);
 
   return (
