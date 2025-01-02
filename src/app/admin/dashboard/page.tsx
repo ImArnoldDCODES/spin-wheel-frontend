@@ -4,7 +4,7 @@ import { ProfileContext } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
 import { useContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -17,17 +17,30 @@ export default function Index() {
   }
   const { profile, profileFunction } = context;
 
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const token = searchParams.get("token")?.trim();
+
+    if (token) {
+      sessionStorage.setItem("token", token);
+      router.replace("/admin/dashboard");
+    } else {
+      console.error("No token found in the query params");
+    }
+  }, [searchParams, router]);
+
   useEffect(() => {
     profileFunction();
 
-    const timer = setTimeout(() => {
-      if (!profile) {
+    if (!profile) {
+      const timer = setTimeout(() => {
         router.push("/login");
-      }
-    }, 2000);
+      }, 2000);
 
-    return () => clearTimeout(timer);
-  }, [profile]);
+      return () => clearTimeout(timer);
+    }
+  }, [profile, router]);
 
   return (
     <main className="flex h-screen w-screen flex-col md:flex-row">

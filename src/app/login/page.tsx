@@ -1,11 +1,11 @@
 "use client";
 import NavContent from "@/components/NavContent";
 import { AuthContext } from "context/AuthContext";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 
 export default function Index() {
   const authContext = useContext(AuthContext);
@@ -40,6 +40,13 @@ export default function Index() {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleGoogleSignIn = () => {
+    window.location.href =
+      process.env.NODE_ENV === "production"
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`
+        : "http://localhost:5000/auth/google";
   };
 
   return (
@@ -124,7 +131,7 @@ export default function Index() {
                 type="button"
                 className="bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-5 sm:px-16 rounded-full text-lg mx-auto"
                 style={{ boxShadow: "inset 0 4px 12px #47474740" }}
-                disabled
+                onClick={handleGoogleSignIn}
               >
                 Sign In With Google
               </button>

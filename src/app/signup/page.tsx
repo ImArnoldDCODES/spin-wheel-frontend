@@ -1,12 +1,11 @@
 "use client";
 import NavContent from "@/components/NavContent";
 import { AuthContext } from "context/AuthContext";
-import Link from "next/link";
-import React, { useContext, useState } from "react";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import Image from "next/image";
-import axios from "axios";
+import Link from "next/link";
+import { useContext } from "react";
 import * as Yup from "yup";
-import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 
 export default function Index() {
   const authContext = useContext(AuthContext);
@@ -51,47 +50,10 @@ export default function Index() {
   };
 
   const handleGoogleSignUp = () => {
-    // fetch(
-    //   process.env.NODE_ENV === "production"
-    //     ? `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`
-    //     : "http://localhost:5000/auth/google",
-    //   {
-    //     method: "GET",
-    //     credentials: "include",
-    //   }
-    // )
-
-    axios
-      .get(
-        process.env.NODE_ENV === "production"
-          ? `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google/callback`
-          : "http://localhost:5000/auth/google/callback"
-      )
-      .then((response: { ok: any; json: () => any }) => {
-        if (!response.ok) {
-          throw new Error("Authentication failed");
-        }
-        return response.json();
-      })
-      .then((data: { token: any }) => {
-        const token = data.token;
-        console.log(token, "make i see");
-
-        // Store the token in localStorage or context
-        console.log(token, "lets see");
-        sessionStorage.setItem("token", token);
-
-        // Navigate the user to the dashboard
-        window.location.href = "/admin/dashboard";
-      })
-      .catch((err: any) => {
-        console.error("Error during authentication:", err);
-      });
-
-    // window.location.href =
-    //   process.env.NODE_ENV === "production"
-    //     ? `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`
-    //     : "http://localhost:5000/auth/google";
+    window.location.href =
+      process.env.NODE_ENV === "production"
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`
+        : "http://localhost:5000/auth/google";
   };
 
   return (
@@ -180,7 +142,8 @@ export default function Index() {
                 type="button"
                 className="bg-[#F6F4E8] text-dark font-cooper w-full mt-10 py-2 px-5 sm:px-16 rounded-full text-lg mx-auto"
                 style={{ boxShadow: "inset 0 4px 12px #47474740" }}
-                disabled={true}
+                onClick={handleGoogleSignUp}
+                // disabled={true}
               >
                 Sign Up With Google
               </button>

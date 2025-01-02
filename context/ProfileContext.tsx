@@ -14,6 +14,8 @@ const ProfileProvider: React.FC<ContextProviderProps> = ({ children }) => {
 
   const profileFunction = () => {
     const sessionToken = sessionStorage.getItem("token");
+    console.log(sessionToken, "sessioncheck");
+    
     if (sessionToken) {
       useaxios
         .get("/profile", {
