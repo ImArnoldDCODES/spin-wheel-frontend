@@ -1,4 +1,5 @@
 import TransitionLink from "components/TransitionLink";
+import Link from "next/link";
 import React from "react";
 import { MdOutlineQuestionMark } from "react-icons/md";
 import AboutModel from "./aboutModel";
@@ -17,15 +18,17 @@ const NavContent = () => {
           >
             <MdOutlineQuestionMark size={20} />
           </div>
-            <TransitionLink
-              href="/admin/dashboard"
-              label="Dashboard"
-              className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper"
-            />
+          <TransitionLink
+            href="/admin/dashboard"
+            label="Dashboard"
+            className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream text-dark font-cooper"
+          />
         </div>
-        <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full hidden sm:flex">
-          <h1>Made by Arnold</h1>
-        </div>
+        <Link href={"https://github.com/ImArnoldDCODES"}>
+          <div className="cursor-pointer bg-cream text-gray font-cooper w-fit py-4 px-10 rounded-full hidden sm:flex">
+            <h1>Made by Arnold</h1>
+          </div>
+        </Link>
       </section>
     </>
   );

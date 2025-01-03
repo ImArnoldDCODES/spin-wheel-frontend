@@ -5,6 +5,8 @@ import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
 import { useContext, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import NavContent from "@/components/NavContent";
+import Image from "next/image";
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -40,47 +42,92 @@ export default function Index() {
 
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile, router]);
 
   return (
-    <main className="flex h-screen w-screen flex-col md:flex-row">
-      <Navbar />
-      <div className="w-full md:w-[80%] h-full relative">
-        <div className="flex">
-          <CreateModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
-        </div>
-        <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
-          <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
-          <h2 className="text-center text-[1.5rem] md:text-[2rem] md:text-right">
-            Welcome back, <span className="uppercase">{profile?.name}</span>
-          </h2>
-        </div>
-        <div className="ml-0 md:ml-10 flex flex-col md:flex-row gap-5 md:gap-10">
-          <div className="rounded-lg pl-4 w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col justify-center items-center lg:items-start">
-            <h1 className="text-[3.5rem] md:text-[3rem] font-bold">
-              {profile?.giveaways.length ?? 0}
-            </h1>
-            <p className="text-[1rem] md:text-[1.5rem] ml-2">Wheels</p>
+    <main className="bg-bgcream h-screen relative">
+      <section className="absolute w-screen h-full">
+        <NavContent />
+      </section>
+      <section className="w-full h-full flex">
+        <div className="w-1/2 px-12">
+          <div className="bg-desktopcream mt-24 h-[20rem] rounded-2xl relative">
+            <Image
+              src="/pie-3.png"
+              alt="thridpie"
+              width={100}
+              height={100}
+              className="h-full w-[15rem] absolute right-0 rounded-2xl"
+            />
+            <div className="flex flex-col pl-5 py-5 justify-between items-start align-top h-full w-2/3">
+              <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
+                Welcome, Arnold
+              </h1>
+              <button className="bg-cream rounded-3xl h-12 w-[12rem] text-2xl font-semibold font-cooper text-moondark">
+                Create Wheel
+              </button>
+            </div>
           </div>
-          <div
-            className="rounded-lg flex w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer items-center justify-center"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <h1 className="m-auto text-[2.5rem] md:text-[2rem]">Create</h1>
+          <div className="flex-1 h-[10rem] mt-4">
+            <ul>
+              <li className="bg-desktopcream flex text-center items-center justify-between px-6 h-10 rounded-md font-cooper cursor-pointer">
+                <h2 className="text-moondark hover:cursor-pointer">Macbook Giveaway</h2>
+                <h6 className="text-moondark text-opacity-50">3/01/25</h6>
+                <h4 className="text-moondark text-opacity-50">Kola</h4>
+                <Image
+                  src={"/expand.png"}
+                  alt="expand"
+                  width={100}
+                  height={100}
+                  className="w-4 h-4 cursor-pointer"
+                />
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="p-4 md:p-10">
-          <h2 className="text-[1.5rem] md:text-[2rem]">Recents</h2>
-          {profile?.giveaways.length > 0 ? (
-            <Table headings={headings} data={profile.giveaways} />
-          ) : (
-            <div>No giveaways Available</div>
-          )}
-        </div>
-      </div>
+        <div className="w-1/2 bg-desktopcream"></div>
+      </section>
     </main>
+
+    // <main className="flex h-screen w-screen flex-col md:flex-row">
+    //   <Navbar />
+    //   <div className="w-full md:w-[80%] h-full relative">
+    //     <div className="flex">
+    //       <CreateModal
+    //         isOpen={isModalOpen}
+    //         onClose={() => setIsModalOpen(false)}
+    //       />
+    //     </div>
+    //     <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
+    //       <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
+    //       <h2 className="text-center text-[1.5rem] md:text-[2rem] md:text-right">
+    //         Welcome back, <span className="uppercase">{profile?.name}</span>
+    //       </h2>
+    //     </div>
+    //     <div className="ml-0 md:ml-10 flex flex-col md:flex-row gap-5 md:gap-10">
+    //       <div className="rounded-lg pl-4 w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col justify-center items-center lg:items-start">
+    //         <h1 className="text-[3.5rem] md:text-[3rem] font-bold">
+    //           {profile?.giveaways.length ?? 0}
+    //         </h1>
+    //         <p className="text-[1rem] md:text-[1.5rem] ml-2">Wheels</p>
+    //       </div>
+    //       <div
+    //         className="rounded-lg flex w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer items-center justify-center"
+    //         onClick={() => setIsModalOpen(true)}
+    //       >
+    //         <h1 className="m-auto text-[2.5rem] md:text-[2rem]">Create</h1>
+    //       </div>
+    //     </div>
+    //     <div className="p-4 md:p-10">
+    //       <h2 className="text-[1.5rem] md:text-[2rem]">Recents</h2>
+    //       {profile?.giveaways.length > 0 ? (
+    //         <Table headings={headings} data={profile.giveaways} />
+    //       ) : (
+    //         <div>No giveaways Available</div>
+    //       )}
+    //     </div>
+    //   </div>
+    // </main>
   );
 }
