@@ -3,10 +3,18 @@ import Table from "components/Table";
 import { ProfileContext } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, Key } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import NavContent from "@/components/NavContent";
 import Image from "next/image";
+
+interface Giveaway {
+  _id: string;
+  title: string;
+  date: Date;
+  winners: { _id: string; name: string; prize: string }[];
+  items: string[];
+}
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -45,6 +53,16 @@ export default function Index() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile, router]);
 
+  const handleDate = (isoDate: string) => {
+    const date = new Date(isoDate);
+    const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${String(
+      date.getFullYear()
+    ).slice(-2)}`;
+
+    return formattedDate;
+  };
+
+
   return (
     <main className="bg-bgcream h-screen relative">
       <section className="absolute w-screen h-full">
@@ -62,27 +80,36 @@ export default function Index() {
             />
             <div className="flex flex-col pl-5 py-5 justify-between items-start align-top h-full w-2/3">
               <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
-                Welcome, Arnold
+                Welcome, {profile?.name.split(" ")}
               </h1>
               <button className="bg-cream rounded-3xl h-12 w-[12rem] text-2xl font-semibold font-cooper text-moondark">
                 Create Wheel
               </button>
             </div>
           </div>
-          <div className="flex-1 h-[10rem] mt-4">
+          <div className="flex-1 h-[15rem] mt-4 overflow-y-auto">
             <ul>
-              <li className="bg-desktopcream flex text-center items-center justify-between px-6 h-10 rounded-md font-cooper cursor-pointer">
-                <h2 className="text-moondark hover:cursor-pointer">Macbook Giveaway</h2>
-                <h6 className="text-moondark text-opacity-50">3/01/25</h6>
-                <h4 className="text-moondark text-opacity-50">Kola</h4>
-                <Image
-                  src={"/expand.png"}
-                  alt="expand"
-                  width={100}
-                  height={100}
-                  className="w-4 h-4 cursor-pointer"
-                />
-              </li>
+              {profile?.giveaways.map((data: any) => (
+                <li
+                  key={data.winners._id}
+                  className="bg-desktopcream flex text-center items-center justify-between px-6 h-10 rounded-md font-cooper cursor-pointer mb-3"
+                >
+                  <h2 className="text-moondark hover:cursor-pointer">
+                    {data.title}
+                  </h2>
+                  <h6 className="text-moondark text-opacity-50">
+                    {handleDate(data.date)}
+                  </h6>
+                  <h4 className="text-moondark text-opacity-50">Kola</h4>
+                  <Image
+                    src="/expand.png"
+                    alt="expand"
+                    width={100}
+                    height={100}
+                    className="w-4 h-4 cursor-pointer"
+                  />
+                </li>
+              ))}
             </ul>
           </div>
         </div>
