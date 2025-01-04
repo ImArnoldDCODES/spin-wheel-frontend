@@ -10,7 +10,7 @@ const NavContent = () => {
   return (
     <>
       <AboutModel setIsOpen={setModal} isOpen={modal} />
-      <section className="flex items-center justify-between pt-5 px-10 h-fit">
+      <section className="flex items-center justify-between pt-5 px-10 h-fit z-[1]">
         <div className="flex items-center gap-5">
           <div
             className="cursor-pointer h-14 w-14 rounded-full bg-cream flex justify-center items-center"

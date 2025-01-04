@@ -62,10 +62,9 @@ export default function Index() {
     return formattedDate;
   };
 
-
   return (
     <main className="bg-bgcream h-screen relative">
-      <section className="absolute w-screen">
+      <section className="absolute w-full h-full">
         <NavContent />
       </section>
       <section className="w-full h-full flex flex-col lg:flex-row">
@@ -87,7 +86,7 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto custom-scrollbar">
+          <div className="sm:h-[40%] h-[55%] mt-4 relative custom-scrollbar">
             <ul>
               {profile?.giveaways.map((data: any) => (
                 <li
