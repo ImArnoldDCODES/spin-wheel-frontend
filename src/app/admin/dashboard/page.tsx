@@ -86,7 +86,7 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="sm:h-[40%] h-[55%] mt-4 relative custom-scrollbar">
+          <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto relative custom-scrollbar bg-transparent">
             <ul>
               {profile?.giveaways.map((data: any) => (
                 <li
