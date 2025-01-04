@@ -65,7 +65,7 @@ export default function Index() {
 
   return (
     <main className="bg-bgcream h-screen relative">
-      <section className="absolute w-screen h-full">
+      <section className="absolute w-screen">
         <NavContent />
       </section>
       <section className="w-full h-full flex">
