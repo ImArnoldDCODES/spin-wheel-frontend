@@ -69,8 +69,8 @@ export default function Index() {
         <NavContent />
       </section>
       <section className="w-full h-full flex">
-        <div className="w-1/2 px-12">
-          <div className="bg-desktopcream mt-24 h-[20rem] rounded-2xl relative">
+        <div className="w-1/2 px-12 min-h-full">
+          <div className="bg-desktopcream mt-24 h-[40%] rounded-2xl relative">
             <Image
               src="/pie-3.png"
               alt="thridpie"
@@ -87,14 +87,14 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <div className="flex-1 h-[15rem] mt-4 overflow-y-auto">
+          <div className="h-[40%] mt-4 overflow-y-auto custom-scrollbar">
             <ul>
               {profile?.giveaways.map((data: any) => (
                 <li
                   key={data.winners._id}
-                  className="bg-desktopcream flex text-center items-center justify-between px-6 h-10 rounded-md font-cooper cursor-pointer mb-3"
+                  className="bg-desktopcream flex text-center items-center justify-between px-6 h-10 rounded-md font-cooper cursor-pointer mb-3 w-full"
                 >
-                  <h2 className="text-moondark hover:cursor-pointer">
+                  <h2 className="text-moondark text-start hover:cursor-pointer w-[40%]">
                     {data.title}
                   </h2>
                   <h6 className="text-moondark text-opacity-50">
