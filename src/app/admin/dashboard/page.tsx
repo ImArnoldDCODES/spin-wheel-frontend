@@ -65,6 +65,7 @@ export default function Index() {
 
   return (
     <Suspense>
+      <CreateModal isOpen={true} onClose={() => {}}/>
       <main className="bg-bgcream h-screen relative">
         <section className="absolute w-full h-full">
           <NavContent />
@@ -85,6 +86,7 @@ export default function Index() {
                 </h1>
                 <button className="bg-cream rounded-3xl sm:h-12 sm:w-[12rem] h-10 w-[10rem] text-lg sm:text-2xl font-semibold font-cooper text-moondark">
                   Create Wheel
+                  
                 </button>
               </div>
             </div>
@@ -116,7 +118,9 @@ export default function Index() {
               </ul>
             </div>
           </div>
-          <div className="w-1/2 bg-desktopcream"></div>
+          <div className="w-1/2 p-10 bg-desktopcream">
+                  <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark mt-10">Macbook Giveaway</h1>
+          </div>
         </section>
       </main>
     </Suspense>
