@@ -65,7 +65,7 @@ export default function Index() {
 
   return (
     <Suspense>
-      <CreateModal isOpen={true} onClose={() => {}}/>
+      <CreateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
       <main className="bg-bgcream h-screen relative">
         <section className="absolute w-full h-full">
           <NavContent />
@@ -84,7 +84,9 @@ export default function Index() {
                 <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
                   Welcome, {profile?.name.split(" ")}
                 </h1>
-                <button className="bg-cream rounded-3xl sm:h-12 sm:w-[12rem] h-10 w-[10rem] text-lg sm:text-2xl font-semibold font-cooper text-moondark">
+                <button className="bg-cream rounded-3xl sm:h-12 sm:w-[12rem] h-10 w-[10rem] text-lg sm:text-2xl font-semibold font-cooper text-moondark"
+                onClick={() => setIsModalOpen(true)}
+                >
                   Create Wheel
                   
                 </button>

@@ -63,9 +63,6 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         className="bg-cream p-6 rounded-xl shadow-lg max-w-md w-full"
       >
         <div className="flex">
-          {/* <button onClick={onClose} className="flex ml-auto text-red-500">
-            *Close
-          </button> */}
         </div>
         <input
           type="text"
@@ -91,7 +88,13 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           >
             Add Item
           </button>
-          <button onClick={handleSubmit} className="bg-moondark text-white py-2 px-2 rounded-full text-xl font-semibold font-cooper">Create Wheel</button>
+          <button
+            onClick={handleSubmit}
+            className="bg-moondark text-white py-2 px-2 rounded-full text-xl font-semibold font-cooper"
+            disabled={items.length > 0 ? false : true}
+          >
+            Create Wheel
+          </button>
           {giveawayId && (
             <h1>
               Copy URL:{" "}
