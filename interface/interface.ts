@@ -20,6 +20,7 @@ export interface User {
 export interface Winner {
   name?: string;
   prize?: string;
+  _id?: string;
 }
 
 export interface TableData {

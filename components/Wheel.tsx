@@ -11,7 +11,6 @@ import { WheelContext } from "../context/WheelContext";
 import { useRouter } from "next/navigation";
 import useaxios from "../axios";
 import Image from "next/image";
-
 interface ChildComponentProps {
   resData: (prop?: number) => void;
 }
@@ -83,6 +82,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       ctx.restore();
     });
   }, [currentAngle, segments, colors, radius]);
+
 
   useEffect(() => {
     drawWheel();
@@ -228,7 +228,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           alt="arrow"
           width={30}
           height={20}
-          className="ml-[40%] absolute rotate-90"
+          className="ml-[40%] absolute rotate-90 w-full h-full"
         />
         <button
           className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"

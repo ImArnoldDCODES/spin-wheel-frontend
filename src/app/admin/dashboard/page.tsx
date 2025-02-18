@@ -1,6 +1,6 @@
 "use client";
 import Table from "components/Table";
-import { ProfileContext } from "context/ProfileContext";
+import { ProfileContext, ProfileProvider } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
 import { useContext, useState, useEffect, Key } from "react";
@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import NavContent from "@/components/NavContent";
 import Image from "next/image";
 import { Suspense } from "react";
+import { Winner } from "interface/interface";
 
 interface Giveaway {
   _id: string;
@@ -19,6 +20,7 @@ interface Giveaway {
 
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [winnerIndex, setWinnderIndex] = useState<number>(0);
   const headings = ["name", "date", "number of winners"];
   const context = useContext(ProfileContext);
   const router = useRouter();
@@ -63,9 +65,14 @@ export default function Index() {
     return formattedDate;
   };
 
+  function res() {
+    const data = profile.giveaways[winnerIndex];
+    return data;
+  }
+
   return (
     <Suspense>
-      <CreateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+      <CreateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <main className="bg-bgcream h-screen relative">
         <section className="absolute w-full h-full">
           <NavContent />
@@ -84,20 +91,21 @@ export default function Index() {
                 <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
                   Welcome, {profile?.name.split(" ")}
                 </h1>
-                <button className="bg-cream rounded-3xl sm:h-12 sm:w-[12rem] h-10 w-[10rem] text-lg sm:text-2xl font-semibold font-cooper text-moondark"
-                onClick={() => setIsModalOpen(true)}
+                <button
+                  className="bg-cream rounded-3xl sm:h-12 sm:w-[12rem] h-10 w-[10rem] text-lg sm:text-2xl font-semibold font-cooper text-moondark"
+                  onClick={() => setIsModalOpen(true)}
                 >
                   Create Wheel
-                  
                 </button>
               </div>
             </div>
             <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto relative custom-scrollbar bg-transparent">
               <ul>
-                {profile?.giveaways.map((data: any) => (
+                {profile?.giveaways.map((data: any, index: number) => (
                   <li
                     key={data.winners._id}
-                    className="bg-desktopcream flex text-center items-center justify-between px-6 sm:h-10 h-14 rounded-md font-cooper cursor-pointer mb-3 w-full"
+                    onClick={() => setWinnderIndex(index)}
+                    className="bg-desktopcream hover:bg-cream flex text-center items-center justify-between px-6 sm:h-10 h-14 rounded-md font-cooper cursor-pointer mb-3 w-full"
                   >
                     <h2 className="text-moondark text-start hover:cursor-pointer w-[40%]">
                       {data.title}
@@ -120,9 +128,51 @@ export default function Index() {
               </ul>
             </div>
           </div>
-          <div className="w-1/2 p-10 bg-desktopcream">
-                  <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark mt-10">Macbook Giveaway</h1>
-          </div>
+          <section className="w-1/2 bg-desktopcream">
+            <div className="relative h-full w-full">
+              <div className="p-10">
+                <div className="mt-12 flex">
+                <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
+                  {res().title}
+                </h1>
+                <h3 className="text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer">Copy Link</h3>
+                </div>
+                <section className="mt-5 flex flex-wrap gap-3">
+                  {res().winners.map((data: Winner) => (
+                    <div
+                      key={data._id}
+                      className="w-fit h-fit px-5 rounded-full flex bg-bgcream font-century space-x-3"
+                    >
+                      <h4>{data.name}</h4>
+                      <p>{data.prize}</p>
+                    </div>
+                  ))}
+                </section>
+              </div>
+              <Image
+                src={"/pie-2.png"}
+                alt="left-pie"
+                width={200}
+                height={100}
+                className="absolute bottom-0 left-0"
+              />
+              <div className="absolute bottom-5 right-10 space-x-3">
+                <button
+                  className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
+                  disabled={winnerIndex <= 0 ? true : false}
+                  onClick={(prev) => setWinnderIndex((prev) => prev - 1)}
+                >
+                  Previous
+                </button>
+                <button
+                  className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
+                  onClick={(prev) => setWinnderIndex((prev) => prev + 1)}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </section>
         </section>
       </main>
     </Suspense>
@@ -168,3 +218,26 @@ export default function Index() {
     // </main>
   );
 }
+
+const items = [
+  { name: "Kola", count: 14 },
+  { name: "Coffee", count: 22 },
+  { name: "Cappuccino Extra Foam", count: 8 },
+  { name: "Tea", count: 32 },
+  { name: "Green Tea Matcha", count: 17 },
+  { name: "Espresso", count: 42 },
+  { name: "Mocha", count: 29 },
+  { name: "Hot Chocolate with Whipped Cream", count: 11 },
+  { name: "Americano", count: 53 },
+  { name: "Latte", count: 36 },
+  { name: "Chai", count: 19 },
+  { name: "Red Bull", count: 24 },
+  { name: "Mineral Water", count: 87 },
+  { name: "Cascara", count: 5 },
+  { name: "Apple Juice Fresh Pressed", count: 12 },
+  { name: "Gatorade", count: 31 },
+  { name: "Smoothie", count: 27 },
+  { name: "Lemonade", count: 44 },
+  { name: "Iced Coffee", count: 39 },
+  { name: "Protein Shake", count: 18 },
+];

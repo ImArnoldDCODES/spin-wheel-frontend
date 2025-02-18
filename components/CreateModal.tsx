@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import useaxios from "../axios";
+import { RxCross2 } from "react-icons/rx";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -62,8 +63,7 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         ref={modalRef}
         className="bg-cream p-6 rounded-xl shadow-lg max-w-md w-full"
       >
-        <div className="flex">
-        </div>
+        <div className="flex"></div>
         <input
           type="text"
           value={title}
@@ -72,16 +72,35 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           className="block w-full mt-1 p-2 outline-none rounded-2xl bg-bgcream font-semibold shadow font-cooper"
         />
         <div className="my-4 gap-5 flex flex-col">
-          {items.map((item, index) => (
-            <input
-              key={index}
-              type="text"
-              value={item}
-              placeholder="New Item"
-              onChange={(e) => handleChangeItem(index, e.target.value)}
-              className="block w-full mt-1 p-2 outline-none rounded-2xl bg-bgcream font-semibold shadow font-mono"
-            />
-          ))}
+          {items.map((item, index) => {
+            const eindex = index;
+            return (
+              <div className="relative">
+                <input
+                  key={index}
+                  type="text"
+                  value={item}
+                  placeholder="New Item"
+                  onChange={(e) => handleChangeItem(index, e.target.value)}
+                  className="block w-full mt-1 p-2 outline-none rounded-2xl bg-bgcream font-semibold shadow font-mono"
+                />
+                <div
+                  className={
+                    index > 0
+                      ? `absolute top-4 right-3 cursor-pointer`
+                      : "hidden"
+                  }
+                >
+                  <RxCross2
+                    size={16}
+                    onClick={() =>
+                      setItems(items.filter((_, idx) => idx !== index))
+                    }
+                  />
+                </div>
+              </div>
+            );
+          })}
           <button
             onClick={handleAddItem}
             className="font-cooper px-4 py-2 bg-blue-500 text-white rounded-full"
@@ -90,8 +109,8 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           </button>
           <button
             onClick={handleSubmit}
-            className="bg-moondark text-white py-2 px-2 rounded-full text-xl font-semibold font-cooper"
-            disabled={items.length > 0 ? false : true}
+            className="bg-moondark text-white mt-3 py-2 px-2 rounded-full text-xl font-semibold font-cooper"
+            disabled={items.length > 1 ? false : true}
           >
             Create Wheel
           </button>
