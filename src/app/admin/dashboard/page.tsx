@@ -141,7 +141,7 @@ export default function Index() {
                   {res().winners.map((data: Winner) => (
                     <div
                       key={data._id}
-                      className="w-fit h-fit px-5 rounded-full flex bg-bgcream font-century space-x-3"
+                      className="w-fit h-fit px-5 rounded-full flex bg-cream font-century space-x-3"
                     >
                       <h4>{data.name}</h4>
                       <p>{data.prize}</p>
