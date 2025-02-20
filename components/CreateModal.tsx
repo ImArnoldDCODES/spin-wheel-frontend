@@ -114,14 +114,14 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           >
             Create Wheel
           </button>
-          {giveawayId && (
+          {/* {giveawayId && (
             <h1>
               Copy URL:{" "}
               {process.env.NODE_ENV === "development"
                 ? `http://localhost:3000/play?id=${giveawayId}`
                 : `https://spin-wheel-frontend.brimble.app/play?id=${giveawayId}`}
             </h1>
-          )}
+          )} */}
         </div>
       </div>
     </div>

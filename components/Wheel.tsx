@@ -108,6 +108,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       useaxios
         .get(`/giveaways/${id}`)
         .then((response: { data: { items: Array<string> } }) => {
+          console.log(response.data, "Resres")
           setSegements(response.data.items);
         })
         .catch((err: string) => {
@@ -119,6 +120,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(segments, "hello")
     setShowModal(false);
   };
 
@@ -228,7 +230,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           alt="arrow"
           width={30}
           height={20}
-          className="ml-[40%] absolute rotate-90 w-full h-full"
+          className="ml-[40%] absolute rotate-90"
         />
         <button
           className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"

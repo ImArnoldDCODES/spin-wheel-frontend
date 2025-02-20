@@ -66,9 +66,21 @@ export default function Index() {
   };
 
   function res() {
-    const data = profile.giveaways[winnerIndex];
+    const data = profile?.giveaways[winnerIndex];
     return data;
   }
+
+  const [copy, setCopy] = useState("Copy Link");
+  const copytoClipboard = () => {
+    navigator.clipboard.writeText(
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3000/?id=${res().giveawayId}`
+        : `https://spin-wheel-frontend.brimble.app/?id=${res().giveawayId}`
+    );
+    setCopy("Copied!");
+
+    setTimeout(() => setCopy("Copy Link"), 2000);
+  };
 
   return (
     <Suspense>
@@ -132,13 +144,18 @@ export default function Index() {
             <div className="relative h-full w-full">
               <div className="p-10">
                 <div className="mt-12 flex">
-                <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
-                  {res().title}
-                </h1>
-                <h3 className="text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer">Copy Link</h3>
+                  <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
+                    {res()?.title}
+                  </h1>
+                  <h3
+                    className="text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer"
+                    onClick={copytoClipboard}
+                  >
+                    {copy}
+                  </h3>
                 </div>
                 <section className="mt-5 flex flex-wrap gap-3">
-                  {res().winners.map((data: Winner) => (
+                  {res()?.winners.map((data: Winner) => (
                     <div
                       key={data._id}
                       className="w-fit h-fit px-5 rounded-full flex bg-cream font-century space-x-3"
