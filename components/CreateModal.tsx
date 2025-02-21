@@ -73,11 +73,9 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         />
         <div className="my-4 gap-5 flex flex-col">
           {items.map((item, index) => {
-            const eindex = index;
             return (
-              <div className="relative">
+              <div className="relative" key={index}>
                 <input
-                  key={index}
                   type="text"
                   value={item}
                   placeholder="New Item"
