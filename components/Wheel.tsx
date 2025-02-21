@@ -83,7 +83,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     });
   }, [currentAngle, segments, colors, radius]);
 
-
   useEffect(() => {
     drawWheel();
   }, [currentAngle, drawWheel]);
@@ -103,24 +102,26 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
   useEffect(() => {
     checkFormSubmission();
-    if (id) {
+    if (id && !checkFormSubmission) {
       setShowModal(true);
       useaxios
         .get(`/giveaways/${id}`)
         .then((response: { data: { items: Array<string> } }) => {
-          console.log(response.data, "Resres")
+          console.log(response.data, "Resres");
           setSegements(response.data.items);
         })
         .catch((err: string) => {
           console.log(err);
         });
+    } else {
+      setShowModal(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(segments, "hello")
+    console.log(segments, "hello");
     setShowModal(false);
   };
 
