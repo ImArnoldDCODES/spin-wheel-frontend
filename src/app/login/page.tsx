@@ -34,7 +34,7 @@ export default function Index() {
     const { setSubmitting } = formikHelpers;
     try {
       setSubmitting(true);
-      login(values.email, values.password);
+      await login(values.email, values.password);
     } catch (error) {
       console.log("login faild", error);
     } finally {
@@ -58,6 +58,7 @@ export default function Index() {
           width={200}
           height={200}
           className="rotate-90 hidden sm:block"
+          property={"true"}
         />
         <Image
           src={"/pie-2.png"}

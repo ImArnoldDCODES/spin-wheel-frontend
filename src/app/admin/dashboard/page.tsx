@@ -3,7 +3,7 @@ import Table from "components/Table";
 import { ProfileContext, ProfileProvider } from "context/ProfileContext";
 import CreateModal from "components/CreateModal";
 import Navbar from "components/Navbar";
-import { useContext, useState, useEffect, Key } from "react";
+import { useContext, useState, useEffect, Key, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import NavContent from "@/components/NavContent";
 import Image from "next/image";
@@ -65,17 +65,16 @@ export default function Index() {
     return formattedDate;
   };
 
-  function res() {
-    const data = profile?.giveaways[winnerIndex];
-    return data;
-  }
+  const res = useMemo(() => {
+    return profile?.giveaways[winnerIndex];
+  }, [profile, winnerIndex])
 
   const [copy, setCopy] = useState("Copy Link");
   const copytoClipboard = () => {
     navigator.clipboard.writeText(
       process.env.NODE_ENV === "development"
-        ? `http://localhost:3000/?id=${res().giveawayId}`
-        : `https://spin-wheel-frontend.brimble.app/?id=${res().giveawayId}`
+        ? `http://localhost:3000/?id=${res.giveawayId}`
+        : `https://spin-wheel-frontend.brimble.app/?id=${res.giveawayId}`
     );
     setCopy("Copied!");
 
@@ -145,17 +144,17 @@ export default function Index() {
               <div className="p-10">
                 <div className="mt-12 flex">
                   <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
-                    {res()?.title}
+                    {res?.title}
                   </h1>
                   <h3
-                    className="text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer"
+                    className={res ? "text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer" : "hidden"}
                     onClick={copytoClipboard}
                   >
                     {copy}
                   </h3>
                 </div>
                 <section className="mt-5 flex flex-wrap gap-3">
-                  {res()?.winners.map((data: Winner) => (
+                  {res?.winners.map((data: Winner) => (
                     <div
                       key={data._id}
                       className="w-fit h-fit px-5 rounded-full flex bg-cream font-century space-x-3"
