@@ -1,14 +1,12 @@
 "use client";
-import Table from "components/Table";
-import { ProfileContext, ProfileProvider } from "context/ProfileContext";
-import CreateModal from "components/CreateModal";
-import Navbar from "components/Navbar";
-import { useContext, useState, useEffect, Key, useMemo, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import NavContent from "@/components/NavContent";
-import Image from "next/image";
-import { Winner } from "interface/interface";
 import TokenHandler from "@/components/searchParam";
+import CreateModal from "components/CreateModal";
+import { ProfileContext } from "context/ProfileContext";
+import { Winner } from "interface/interface";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 
 interface Giveaway {
   _id: string;
