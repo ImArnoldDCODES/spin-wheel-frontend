@@ -1,14 +1,12 @@
 "use client";
-import Table from "components/Table";
-import { ProfileContext, ProfileProvider } from "context/ProfileContext";
-import CreateModal from "components/CreateModal";
-import Navbar from "components/Navbar";
-import { useContext, useState, useEffect, Key, useMemo } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import NavContent from "@/components/NavContent";
-import Image from "next/image";
-import { Suspense } from "react";
+import TokenHandler from "@/components/searchParam";
+import CreateModal from "components/CreateModal";
+import { ProfileContext } from "context/ProfileContext";
 import { Winner } from "interface/interface";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 
 interface Giveaway {
   _id: string;
@@ -29,19 +27,6 @@ export default function Index() {
     throw new Error("Profile must be within a ProfileProvider");
   }
   const { profile, profileFunction } = context;
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const token = searchParams.get("token")?.trim();
-
-    if (token) {
-      sessionStorage.setItem("token", token);
-      router.replace("/admin/dashboard");
-    } else {
-      console.error("No token found in the query params");
-    }
-  }, [searchParams, router]);
 
   useEffect(() => {
     profileFunction();
@@ -67,7 +52,7 @@ export default function Index() {
 
   const res = useMemo(() => {
     return profile?.giveaways[winnerIndex];
-  }, [profile, winnerIndex])
+  }, [profile, winnerIndex]);
 
   const [copy, setCopy] = useState("Copy Link");
   const copytoClipboard = () => {
@@ -83,6 +68,7 @@ export default function Index() {
 
   return (
     <Suspense>
+      <TokenHandler />
       <CreateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <main className="bg-bgcream h-screen relative">
         <section className="absolute w-full h-full">
@@ -147,7 +133,11 @@ export default function Index() {
                     {res?.title}
                   </h1>
                   <h3
-                    className={res ? "text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer" : "hidden"}
+                    className={
+                      res
+                        ? "text-md font-cooper bg-cream text-moondark w-fit px-3 h-fit mt-5 ml-2 hover:bg-bgcream hover:text-dark rounded-full cursor-pointer"
+                        : "hidden"
+                    }
                     onClick={copytoClipboard}
                   >
                     {copy}
