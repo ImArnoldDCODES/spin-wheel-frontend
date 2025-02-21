@@ -14,7 +14,8 @@ const config: Config = {
         gray: "#37353280",
         dark: "#373532",
         yellow: "#EFCB3B",
-        moondark: "#474747" 
+        moondark: "#474747",
+        desktopcream: "#E8E5D4"
       },
       fontFamily: {
         cooper: ["Cooper", "Poppins"],

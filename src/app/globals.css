@@ -1,40 +1,54 @@
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    -webkit-text-fill-color: black;
-    background-color: transparent;
-    transition: background-color 5000s ease-in-out 0s;
-  }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: black;
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
-  @font-face {
-    font-family: "Wonder";
-    src: url("/Wonder-Font/Wonder.ttf") format("truetype");
-  }
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
 
-  @font-face {
-    font-family: "Samurai";
-    src: url("/samurai-blast-font/SamuraiBlast-YznGj.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Cooper";
-    src: url("/COOPBL.TTF") format("truetype");
-  }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #474747;
+  border-radius: 4px;
+}
 
-  @font-face {
-    font-family: "Century";
-    src: url("/CenturyBold.ttf") format("truetype");
-  }
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  body::-webkit-scrollbar {
-    width: 0;
-  } 
+@font-face {
+  font-family: "Wonder";
+  src: url("/Wonder-Font/Wonder.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Samurai";
+  src: url("/samurai-blast-font/SamuraiBlast-YznGj.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cooper";
+  src: url("/COOPBL.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "Century";
+  src: url("/CenturyBold.ttf") format("truetype");
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}

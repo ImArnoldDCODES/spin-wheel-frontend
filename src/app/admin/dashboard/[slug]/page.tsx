@@ -5,6 +5,7 @@ import { ProfileContext } from "context/ProfileContext";
 import { Giveaway, Winner } from "interface/interface";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { Suspense } from "react";
 
 const TableInfo: React.FC = () => {
   const { slug } = useParams();
@@ -34,12 +35,12 @@ const TableInfo: React.FC = () => {
     })) ?? [];
 
   return (
-    <div>
+    <Suspense>
       <div className="p-10">
         <h2 className="text-[2rem]">{data?.title}</h2>
         <Table headings={headings} data={winners} />
       </div>
-    </div>
+    </Suspense>
   );
 };
 

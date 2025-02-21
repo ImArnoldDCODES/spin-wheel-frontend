@@ -1,5 +1,4 @@
 import { useSearchParams } from "next/navigation";
-import { RiArrowLeftSFill } from "react-icons/ri";
 import React, {
   useCallback,
   useEffect,
@@ -11,8 +10,7 @@ import React, {
 import { WheelContext } from "../context/WheelContext";
 import { useRouter } from "next/navigation";
 import useaxios from "../axios";
-import Image from "next/image"
-
+import Image from "next/image";
 interface ChildComponentProps {
   resData: (prop?: number) => void;
 }
@@ -50,7 +48,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     ],
     []
   );
-  const remSize = 13;
+  const remSize = 12;
   const radius = remSize + 50;
 
   const drawWheel = useCallback(() => {
@@ -85,6 +83,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     });
   }, [currentAngle, segments, colors, radius]);
 
+
   useEffect(() => {
     drawWheel();
   }, [currentAngle, drawWheel]);
@@ -109,6 +108,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       useaxios
         .get(`/giveaways/${id}`)
         .then((response: { data: { items: Array<string> } }) => {
+          console.log(response.data, "Resres")
           setSegements(response.data.items);
         })
         .catch((err: string) => {
@@ -120,6 +120,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(segments, "hello")
     setShowModal(false);
   };
 
@@ -224,12 +225,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           ref={canvasRef}
           style={{ width: "100%", height: "100%" }}
         ></canvas>
-        {/* <RiArrowLeftSFill
-          className="ml-[41%] absolute"
-          color="#000"
-          size={50}
-        /> */}
-         <Image
+        <Image
           src={"/arrow.png"}
           alt="arrow"
           width={30}
@@ -237,10 +233,9 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           className="ml-[40%] absolute rotate-90"
         />
         <button
-          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute "
+          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"
           style={{
             lineHeight: "4rem",
-            // fontFamily: "century",
             borderRadius: "50%",
             width: "4rem",
             height: "4rem",
