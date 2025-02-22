@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, {
-  useCallback, useContext, useEffect, useMemo, useRef,
-  useState
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 import useaxios from "../axios";
 import { WheelContext } from "../context/WheelContext";
@@ -177,20 +181,14 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (id && !spinning && selectedSegment) {
-        localStorage.setItem(`formSubmitted_${id}`, "true");
-        alert(`Congratulations you won ${selectedSegment}`);
+    if (id && !spinning && selectedSegment) {
+      localStorage.setItem(`formSubmitted_${id}`, "true");
+      alert(`Congratulations you won ${selectedSegment}`);
 
-        clearInterval(interval);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 0);
-      }
-    }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [spinning, selectedSegment]);
+      setSegements(() => ["1", "2", "3", "4", "5", "6", "7", "8"]);
+      router.push("/");
+    }
+  }, [id, spinning, selectedSegment, router]);
 
   return (
     <>
