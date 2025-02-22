@@ -8,18 +8,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 
-interface Giveaway {
-  _id: string;
-  title: string;
-  date: Date;
-  winners: { _id: string; name: string; prize: string }[];
-  items: string[];
-}
-
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [winnerIndex, setWinnderIndex] = useState<number>(0);
-  const headings = ["name", "date", "number of winners"];
   const context = useContext(ProfileContext);
   const router = useRouter();
 
