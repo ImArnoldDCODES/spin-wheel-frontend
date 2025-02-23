@@ -117,9 +117,10 @@ export default function Index() {
             </div>
           </div>
           <section className="w-1/2 bg-desktopcream">
-            <div className="relative h-full w-full">
-              <div className="p-10">
-                <div className="mt-12 flex">
+            <div className="w-full h-[12%]"></div>
+            <div className="relative h-[88%] w-full">
+              <div className="px-10">
+                <div className="flex">
                   <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
                     {res?.title}
                   </h1>
@@ -173,68 +174,5 @@ export default function Index() {
         </section>
       </main>
     </Suspense>
-
-    // <main className="flex h-screen w-screen flex-col md:flex-row">
-    //   <Navbar />
-    //   <div className="w-full md:w-[80%] h-full relative">
-    //     <div className="flex">
-    //       <CreateModal
-    //         isOpen={isModalOpen}
-    //         onClose={() => setIsModalOpen(false)}
-    //       />
-    //     </div>
-    //     <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
-    //       <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
-    //       <h2 className="text-center text-[1.5rem] md:text-[2rem] md:text-right">
-    //         Welcome back, <span className="uppercase">{profile?.name}</span>
-    //       </h2>
-    //     </div>
-    //     <div className="ml-0 md:ml-10 flex flex-col md:flex-row gap-5 md:gap-10">
-    //       <div className="rounded-lg pl-4 w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col justify-center items-center lg:items-start">
-    //         <h1 className="text-[3.5rem] md:text-[3rem] font-bold">
-    //           {profile?.giveaways.length ?? 0}
-    //         </h1>
-    //         <p className="text-[1rem] md:text-[1.5rem] ml-2">Wheels</p>
-    //       </div>
-    //       <div
-    //         className="rounded-lg flex w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer items-center justify-center"
-    //         onClick={() => setIsModalOpen(true)}
-    //       >
-    //         <h1 className="m-auto text-[2.5rem] md:text-[2rem]">Create</h1>
-    //       </div>
-    //     </div>
-    //     <div className="p-4 md:p-10">
-    //       <h2 className="text-[1.5rem] md:text-[2rem]">Recents</h2>
-    //       {profile?.giveaways.length > 0 ? (
-    //         <Table headings={headings} data={profile.giveaways} />
-    //       ) : (
-    //         <div>No giveaways Available</div>
-    //       )}
-    //     </div>
-    //   </div>
-    // </main>
   );
 }
-
-const items = [
-  { name: "Kola", count: 14 },
-  { name: "Coffee", count: 22 },
-  { name: "Cappuccino Extra Foam", count: 8 },
-  { name: "Tea", count: 32 },
-  { name: "Green Tea Matcha", count: 17 },
-  { name: "Espresso", count: 42 },
-  { name: "Mocha", count: 29 },
-  { name: "Hot Chocolate with Whipped Cream", count: 11 },
-  { name: "Americano", count: 53 },
-  { name: "Latte", count: 36 },
-  { name: "Chai", count: 19 },
-  { name: "Red Bull", count: 24 },
-  { name: "Mineral Water", count: 87 },
-  { name: "Cascara", count: 5 },
-  { name: "Apple Juice Fresh Pressed", count: 12 },
-  { name: "Gatorade", count: 31 },
-  { name: "Smoothie", count: 27 },
-  { name: "Lemonade", count: 44 },
-  { name: "Iced Coffee", count: 39 },
-  { name: "Protein Shake", count: 18 },
-];
