@@ -45,7 +45,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold mb-4 text-gray-800 font-cooper">
                 Recent
               </h2>
-              <div className="overflow-y-auto h-[calc(100%-4rem)]">
+              <div className="overflow-y-auto custom-scrollbar h-[calc(100%-4rem)]">
                 <ul className="space-y-2">
                   {recents.map((number, index) => (
                     <li

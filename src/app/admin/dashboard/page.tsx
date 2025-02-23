@@ -11,6 +11,7 @@ import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [winnerIndex, setWinnderIndex] = useState<number>(0);
+  const [copy, setCopy] = useState("Copy Link");
   const context = useContext(ProfileContext);
   const router = useRouter();
 
@@ -22,13 +23,14 @@ export default function Index() {
   useEffect(() => {
     profileFunction();
 
-    if (!profile) {
-      const timer = setTimeout(() => {
+    if (profile === null || profile === undefined) {
+      const redirect = setTimeout(() => {
         router.push("/login");
       }, 2000);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(redirect);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile, router]);
 
@@ -45,7 +47,6 @@ export default function Index() {
     return profile?.giveaways[winnerIndex];
   }, [profile, winnerIndex]);
 
-  const [copy, setCopy] = useState("Copy Link");
   const copytoClipboard = () => {
     navigator.clipboard.writeText(
       process.env.NODE_ENV === "development"
@@ -56,6 +57,19 @@ export default function Index() {
 
     setTimeout(() => setCopy("Copy Link"), 2000);
   };
+
+  function handlePrev() {
+    if (winnerIndex >= 0) {
+      setWinnderIndex(winnerIndex - 1);
+      console.log(winnerIndex);
+    }
+  }
+
+  function handleNext() {
+    if (winnerIndex < profile?.giveaways.length - 1) {
+      setWinnderIndex(winnerIndex + 1);
+    }
+  }
 
   return (
     <Suspense>
@@ -87,7 +101,7 @@ export default function Index() {
                 </button>
               </div>
             </div>
-            <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto relative custom-scrollbar bg-transparent">
+            <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto custom-scrollbar relative  bg-transparent">
               <ul>
                 {profile?.giveaways.map((data: any, index: number) => (
                   <li
@@ -158,13 +172,13 @@ export default function Index() {
                 <button
                   className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
                   disabled={winnerIndex <= 0 ? true : false}
-                  onClick={(prev) => setWinnderIndex((prev) => prev - 1)}
+                  onClick={handlePrev}
                 >
                   Previous
                 </button>
                 <button
                   className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
-                  onClick={(prev) => setWinnderIndex((prev) => prev + 1)}
+                  onClick={handleNext}
                 >
                   Next
                 </button>

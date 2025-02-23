@@ -185,8 +185,8 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       localStorage.setItem(`formSubmitted_${id}`, "true");
       alert(`Congratulations you won ${selectedSegment}`);
 
-      setSegements(() => ["1", "2", "3", "4", "5", "6", "7", "8"]);
       router.push("/");
+      window.location.reload()
     }
   }, [id, spinning, selectedSegment, router]);
 
@@ -216,7 +216,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       <div
         className="relative"
         style={{
-          // width: `${remSize * 3}rem`,
           width: "100%",
           height: `${remSize * 2}rem`,
           display: "flex",
@@ -233,11 +232,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           alt="arrow"
           width={30}
           height={20}
-          className="ml-[40%] absolute rotate-90"
+          className="ml-[6%] absolute -rotate-90 drop-shadow-xl"
           property={"true"}
         />
         <button
-          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"
+          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute drop-shadow-xl"
           style={{
             lineHeight: "4rem",
             borderRadius: "50%",
