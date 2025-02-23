@@ -234,6 +234,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           width={30}
           height={20}
           className="ml-[40%] absolute rotate-90"
+          property={"true"}
         />
         <button
           className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"
