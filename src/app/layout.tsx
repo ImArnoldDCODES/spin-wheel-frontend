@@ -5,8 +5,8 @@ import { ProfileProvider } from "context/ProfileContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Spin The Wheel",
-  description: "Spin The Wheel",
+  title: "Spinn",
+  description: "Step right up to the most thrilling game of chance on the web!",
 };
 
 export default function RootLayout({
