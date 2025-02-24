@@ -228,12 +228,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           style={{ width: "100%", height: "100%" }}
         ></canvas>
         <Image
-          src={"/arrow.png"}
+          src={"/indicator.png"}
           alt="arrow"
           width={30}
           height={20}
           className="ml-[6%] absolute -rotate-90 drop-shadow-xl"
-          property={"true"}
         />
         <button
           className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute drop-shadow-xl"
