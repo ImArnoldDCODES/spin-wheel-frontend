@@ -228,7 +228,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           style={{ width: "100%", height: "100%" }}
         ></canvas>
         <Image
-          src={"/arrow.png"}
+          src={"/indicator.png"}
           alt="arrow"
           width={30}
           height={20}
