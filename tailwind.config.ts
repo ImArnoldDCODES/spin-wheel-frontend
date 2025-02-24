@@ -19,7 +19,6 @@ const config: Config = {
       },
       fontFamily: {
         cooper: ["Cooper", "Poppins"],
-        samurai: ["Samurai", "Poppins"],
         wonder: ["Wonder", "Poppins"],
         century: ["Century", "Poppins"],
       },

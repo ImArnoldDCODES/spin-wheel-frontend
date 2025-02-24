@@ -1,16 +1,15 @@
-import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, {
   useCallback,
+  useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useMemo,
-  useContext,
 } from "react";
-import { WheelContext } from "../context/WheelContext";
-import { useRouter } from "next/navigation";
 import useaxios from "../axios";
-import Image from "next/image";
+import { WheelContext } from "../context/WheelContext";
 interface ChildComponentProps {
   resData: (prop?: number) => void;
 }
@@ -21,6 +20,9 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [currentAngle, setCurrentAngle] = useState<number>(0);
   const [selectedSegment, setSelectedSegment] = useState<number | string>();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [name, setName] = useState<string>("");
+
   const [segments, setSegements] = useState<Array<string>>([
     "1",
     "2",
@@ -31,7 +33,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     "7",
     "8",
   ]);
-  const [name, setName] = useState<string>("");
 
   const router = useRouter();
 
@@ -83,7 +84,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     });
   }, [currentAngle, segments, colors, radius]);
 
-
   useEffect(() => {
     drawWheel();
   }, [currentAngle, drawWheel]);
@@ -91,36 +91,45 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "";
 
-  const checkFormSubmission = () => {
-    const formSubmitted = localStorage.getItem(`formSubmitted_${id}`);
-    if (formSubmitted) {
-      alert("You have already submitted this form.");
-      setTimeout(() => {
+  useEffect(() => {
+    if (id) {
+      const formSubmitted = localStorage.getItem(`formSubmitted_${id}`);
+      setHasSubmitted(!!formSubmitted);
+      if (formSubmitted) {
+        alert("You have already submitted this form.");
         router.push("/");
-      }, 1);
+      }
     }
-  };
+  }, [id, router]);
 
   useEffect(() => {
-    checkFormSubmission();
-    if (id) {
+    let isMounted = true;
+    if (id && !hasSubmitted) {
       setShowModal(true);
-      useaxios
-        .get(`/giveaways/${id}`)
-        .then((response: { data: { items: Array<string> } }) => {
-          console.log(response.data, "Resres")
-          setSegements(response.data.items);
-        })
-        .catch((err: string) => {
-          console.log(err);
-        });
+
+      const fetchdata = async () => {
+        try {
+          const response = await useaxios.get(`/giveaways/${id}`);
+          if (isMounted) {
+            setSegements(response.data.items);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchdata();
+    } else {
+      setShowModal(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id, hasSubmitted]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(segments, "hello")
     setShowModal(false);
   };
 
@@ -172,20 +181,14 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (id && !spinning && selectedSegment) {
-        localStorage.setItem(`formSubmitted_${id}`, "true");
-        alert(`Congratulations you won ${selectedSegment}`);
+    if (id && !spinning && selectedSegment) {
+      localStorage.setItem(`formSubmitted_${id}`, "true");
+      alert(`Congratulations you won ${selectedSegment}`);
 
-        clearInterval(interval);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 0);
-      }
-    }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [spinning, selectedSegment]);
+      router.push("/");
+      window.location.reload()
+    }
+  }, [id, spinning, selectedSegment, router]);
 
   return (
     <>
@@ -213,7 +216,6 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       <div
         className="relative"
         style={{
-          // width: `${remSize * 3}rem`,
           width: "100%",
           height: `${remSize * 2}rem`,
           display: "flex",
@@ -230,10 +232,11 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
           alt="arrow"
           width={30}
           height={20}
-          className="ml-[40%] absolute rotate-90"
+          className="ml-[6%] absolute -rotate-90 drop-shadow-xl"
+          property={"true"}
         />
         <button
-          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute shadow-xl"
+          className="bg-[#F6F4E8] rounded-full font-century text-center font-thin cursor-pointer absolute drop-shadow-xl"
           style={{
             lineHeight: "4rem",
             borderRadius: "50%",

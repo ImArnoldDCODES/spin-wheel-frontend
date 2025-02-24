@@ -1,7 +1,7 @@
 "use client";
 import NavContent from "@/components/NavContent";
 import SpinTheWheel from "@/components/Wheel";
-import TransitionLink from "components/TransitionLink";
+import Link from "next/link";
 import * as React from "react";
 
 export default function Home() {
@@ -27,9 +27,11 @@ export default function Home() {
               <SpinTheWheel resData={handleRecent} />
             </div>
             <div className="text-dark flex gap-5 items-center mt-8">
-              <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream font-cooper">
-                <TransitionLink href="/login" label="Login" />
-              </button>
+              <Link href={"/login"}>
+                <button className="cursor-pointer w-fit py-4 px-10 rounded-full bg-cream font-cooper">
+                  Login
+                </button>
+              </Link>
               <button
                 className="cursor-pointer w-fit py-4 px-10 rounded-full bg-yellow font-cooper"
                 onClick={() => setModal(!modal)}
@@ -43,7 +45,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold mb-4 text-gray-800 font-cooper">
                 Recent
               </h2>
-              <div className="overflow-y-auto h-[calc(100%-4rem)]">
+              <div className="overflow-y-auto custom-scrollbar h-[calc(100%-4rem)]">
                 <ul className="space-y-2">
                   {recents.map((number, index) => (
                     <li

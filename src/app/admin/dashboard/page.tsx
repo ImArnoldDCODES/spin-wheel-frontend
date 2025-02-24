@@ -8,18 +8,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 
-interface Giveaway {
-  _id: string;
-  title: string;
-  date: Date;
-  winners: { _id: string; name: string; prize: string }[];
-  items: string[];
-}
-
 export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [winnerIndex, setWinnderIndex] = useState<number>(0);
-  const headings = ["name", "date", "number of winners"];
+  const [copy, setCopy] = useState("Copy Link");
   const context = useContext(ProfileContext);
   const router = useRouter();
 
@@ -31,13 +23,14 @@ export default function Index() {
   useEffect(() => {
     profileFunction();
 
-    if (!profile) {
-      const timer = setTimeout(() => {
+    if (profile === null || profile === undefined) {
+      const redirect = setTimeout(() => {
         router.push("/login");
       }, 2000);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(redirect);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile, router]);
 
@@ -54,7 +47,6 @@ export default function Index() {
     return profile?.giveaways[winnerIndex];
   }, [profile, winnerIndex]);
 
-  const [copy, setCopy] = useState("Copy Link");
   const copytoClipboard = () => {
     navigator.clipboard.writeText(
       process.env.NODE_ENV === "development"
@@ -65,6 +57,19 @@ export default function Index() {
 
     setTimeout(() => setCopy("Copy Link"), 2000);
   };
+
+  function handlePrev() {
+    if (winnerIndex >= 0) {
+      setWinnderIndex(winnerIndex - 1);
+      console.log(winnerIndex);
+    }
+  }
+
+  function handleNext() {
+    if (winnerIndex < profile?.giveaways.length - 1) {
+      setWinnderIndex(winnerIndex + 1);
+    }
+  }
 
   return (
     <Suspense>
@@ -96,7 +101,7 @@ export default function Index() {
                 </button>
               </div>
             </div>
-            <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto relative custom-scrollbar bg-transparent">
+            <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto custom-scrollbar relative  bg-transparent">
               <ul>
                 {profile?.giveaways.map((data: any, index: number) => (
                   <li
@@ -126,9 +131,10 @@ export default function Index() {
             </div>
           </div>
           <section className="w-1/2 bg-desktopcream">
-            <div className="relative h-full w-full">
-              <div className="p-10">
-                <div className="mt-12 flex">
+            <div className="w-full h-[12%]"></div>
+            <div className="relative h-[88%] w-full">
+              <div className="px-10">
+                <div className="flex">
                   <h1 className="font-semibold font-cooper text-[2.2rem] text-moondark">
                     {res?.title}
                   </h1>
@@ -166,13 +172,13 @@ export default function Index() {
                 <button
                   className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
                   disabled={winnerIndex <= 0 ? true : false}
-                  onClick={(prev) => setWinnderIndex((prev) => prev - 1)}
+                  onClick={handlePrev}
                 >
                   Previous
                 </button>
                 <button
                   className="bg-cream text-xl font-cooper text-moondark py-4 px-8 rounded-full"
-                  onClick={(prev) => setWinnderIndex((prev) => prev + 1)}
+                  onClick={handleNext}
                 >
                   Next
                 </button>
@@ -182,68 +188,5 @@ export default function Index() {
         </section>
       </main>
     </Suspense>
-
-    // <main className="flex h-screen w-screen flex-col md:flex-row">
-    //   <Navbar />
-    //   <div className="w-full md:w-[80%] h-full relative">
-    //     <div className="flex">
-    //       <CreateModal
-    //         isOpen={isModalOpen}
-    //         onClose={() => setIsModalOpen(false)}
-    //       />
-    //     </div>
-    //     <div className="flex flex-col lg:flex-row justify-between px-4 md:px-8  align-center items-center my-5">
-    //       <h1 className="text-[2rem] md:text-[3rem] text-left">Dashboard</h1>
-    //       <h2 className="text-center text-[1.5rem] md:text-[2rem] md:text-right">
-    //         Welcome back, <span className="uppercase">{profile?.name}</span>
-    //       </h2>
-    //     </div>
-    //     <div className="ml-0 md:ml-10 flex flex-col md:flex-row gap-5 md:gap-10">
-    //       <div className="rounded-lg pl-4 w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] flex flex-col justify-center items-center lg:items-start">
-    //         <h1 className="text-[3.5rem] md:text-[3rem] font-bold">
-    //           {profile?.giveaways.length ?? 0}
-    //         </h1>
-    //         <p className="text-[1rem] md:text-[1.5rem] ml-2">Wheels</p>
-    //       </div>
-    //       <div
-    //         className="rounded-lg flex w-full md:w-[12rem] h-[8rem] bg-[#F5F5F5] cursor-pointer items-center justify-center"
-    //         onClick={() => setIsModalOpen(true)}
-    //       >
-    //         <h1 className="m-auto text-[2.5rem] md:text-[2rem]">Create</h1>
-    //       </div>
-    //     </div>
-    //     <div className="p-4 md:p-10">
-    //       <h2 className="text-[1.5rem] md:text-[2rem]">Recents</h2>
-    //       {profile?.giveaways.length > 0 ? (
-    //         <Table headings={headings} data={profile.giveaways} />
-    //       ) : (
-    //         <div>No giveaways Available</div>
-    //       )}
-    //     </div>
-    //   </div>
-    // </main>
   );
 }
-
-const items = [
-  { name: "Kola", count: 14 },
-  { name: "Coffee", count: 22 },
-  { name: "Cappuccino Extra Foam", count: 8 },
-  { name: "Tea", count: 32 },
-  { name: "Green Tea Matcha", count: 17 },
-  { name: "Espresso", count: 42 },
-  { name: "Mocha", count: 29 },
-  { name: "Hot Chocolate with Whipped Cream", count: 11 },
-  { name: "Americano", count: 53 },
-  { name: "Latte", count: 36 },
-  { name: "Chai", count: 19 },
-  { name: "Red Bull", count: 24 },
-  { name: "Mineral Water", count: 87 },
-  { name: "Cascara", count: 5 },
-  { name: "Apple Juice Fresh Pressed", count: 12 },
-  { name: "Gatorade", count: 31 },
-  { name: "Smoothie", count: 27 },
-  { name: "Lemonade", count: 44 },
-  { name: "Iced Coffee", count: 39 },
-  { name: "Protein Shake", count: 18 },
-];
