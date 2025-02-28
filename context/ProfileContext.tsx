@@ -10,11 +10,11 @@ import useaxios from "../axios";
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
 const ProfileProvider: React.FC<ContextProviderProps> = ({ children }) => {
-  const [profile, setProfile] = useState<User | any>();
+  const [profile, setProfile] = useState<User>();
 
   const profileFunction = () => {
     const sessionToken = sessionStorage.getItem("token");
-    
+
     if (sessionToken) {
       useaxios
         .get("/profile", {
@@ -23,7 +23,7 @@ const ProfileProvider: React.FC<ContextProviderProps> = ({ children }) => {
         .then((response: { data: { user: User } }) => {
           setProfile(response.data.user);
         })
-        .catch((error: any) => {
+        .catch((error: Error) => {
           console.error("Error fetching profile", error);
         });
     }

@@ -11,7 +11,7 @@ import React, {
 import useaxios from "../axios";
 import { WheelContext } from "../context/WheelContext";
 interface ChildComponentProps {
-  resData: (prop?: number) => void;
+  resData: (prop?: number | string) => void;
 }
 
 const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
@@ -33,6 +33,12 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
     "7",
     "8",
   ]);
+
+  // const [segments, setSegements] = useState<Array<string>>([
+  //   "10k airtime",
+  //   "iphone 11",
+  //   "imac",
+  // ]);
 
   const router = useRouter();
 
@@ -172,8 +178,10 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
         const res = segments[segmentIndex];
 
         setSelectedSegment(res);
+        console.log(res, "checking res myself");
+
         id && winner(name, segments[segmentIndex], id);
-        resData(parseInt(res));
+        resData(res);
       }
     };
 
@@ -186,7 +194,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       alert(`Congratulations you won ${selectedSegment}`);
 
       router.push("/");
-      window.location.reload()
+      window.location.reload();
     }
   }, [id, spinning, selectedSegment, router]);
 

@@ -65,7 +65,7 @@ const CreateModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     navigator.clipboard.writeText(
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/?id=${giveawayId}`
-        : `https://spin-wheel-frontend.brimble.app/?id=${giveawayId}`
+        : `https://roulettee.vercel.app/?id=${giveawayId}`
     );
     setCopy("Copied!");
     setTimeout(() => {
