@@ -63,7 +63,6 @@ export default function Index() {
   function handlePrev() {
     if (winnerIndex >= 0) {
       setWinnderIndex(winnerIndex - 1);
-      console.log(winnerIndex);
     }
   }
 
