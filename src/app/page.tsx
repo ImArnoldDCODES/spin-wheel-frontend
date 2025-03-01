@@ -5,12 +5,12 @@ import Link from "next/link";
 import * as React from "react";
 
 export default function Home() {
-  const [recents, setRecents] = React.useState<number[]>([]);
+  const [recents, setRecents] = React.useState<(number | string)[]>([]);
   const [modal, setModal] = React.useState<boolean>(false);
 
-  const handleRecent = (prop: number | undefined) => {
-    if (prop !== undefined) {
-      setRecents((prevArray: number[]) => {
+  const handleRecent = (prop: number | string | undefined) => {
+    if (prop != undefined && prop != null) {
+      setRecents((prevArray: (number | string)[]) => {
         const newData = [prop, ...prevArray];
         return newData;
       });

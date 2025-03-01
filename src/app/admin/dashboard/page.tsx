@@ -3,7 +3,7 @@ import NavContent from "@/components/NavContent";
 import TokenHandler from "@/components/searchParam";
 import CreateModal from "components/CreateModal";
 import { ProfileContext } from "context/ProfileContext";
-import { Winner } from "interface/interface";
+import { Giveaway, Winner } from "interface/interface";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Suspense, useContext, useEffect, useMemo, useState } from "react";
@@ -44,14 +44,16 @@ export default function Index() {
   };
 
   const res = useMemo(() => {
-    return profile?.giveaways[winnerIndex];
+    if (profile) {
+      return profile?.giveaways[winnerIndex];
+    }
   }, [profile, winnerIndex]);
 
   const copytoClipboard = () => {
     navigator.clipboard.writeText(
       process.env.NODE_ENV === "development"
-        ? `http://localhost:3000/?id=${res.giveawayId}`
-        : `https://spin-wheel-frontend.brimble.app/?id=${res.giveawayId}`
+        ? `http://localhost:3000/?id=${res?.giveawayId}`
+        : `https://roulettee.vercel.app/?id=${res?.giveawayId}`
     );
     setCopy("Copied!");
 
@@ -61,12 +63,11 @@ export default function Index() {
   function handlePrev() {
     if (winnerIndex >= 0) {
       setWinnderIndex(winnerIndex - 1);
-      console.log(winnerIndex);
     }
   }
 
   function handleNext() {
-    if (winnerIndex < profile?.giveaways.length - 1) {
+    if (profile && winnerIndex < profile?.giveaways.length - 1) {
       setWinnderIndex(winnerIndex + 1);
     }
   }
@@ -103,9 +104,9 @@ export default function Index() {
             </div>
             <div className="sm:h-[40%] h-[55%] mt-4 overflow-y-auto custom-scrollbar relative  bg-transparent">
               <ul>
-                {profile?.giveaways.map((data: any, index: number) => (
+                {profile?.giveaways.map((data: Giveaway, index: number) => (
                   <li
-                    key={data.winners._id}
+                    key={data.winners[0]?._id}
                     onClick={() => setWinnderIndex(index)}
                     className="bg-desktopcream hover:bg-cream flex text-center items-center justify-between px-6 sm:h-10 h-14 rounded-md font-cooper cursor-pointer mb-3 w-full"
                   >
@@ -116,7 +117,7 @@ export default function Index() {
                       {handleDate(data.date)}
                     </h6>
                     <h4 className="text-moondark text-opacity-50 w-[20%]">
-                      {data.winners?.[0]?.name}
+                      {data.winners[0]?.name}
                     </h4>
                     <Image
                       src="/expand.png"

@@ -5,9 +5,10 @@ export interface ContextProviderProps {
 export interface Giveaway {
   title: string;
   date: string;
-  winners: Array<object>;
+  winners: Winner[];
   items: string[];
   _id: string;
+  giveawayId: string;
 }
 
 export interface User {
@@ -48,6 +49,6 @@ export interface WheelContextType {
 }
 
 export interface ProfileContextType {
-  profile: User | any;
+  profile: User | undefined;
   profileFunction: () => void;
 }

@@ -6,12 +6,13 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import useaxios from "../axios";
 import { WheelContext } from "../context/WheelContext";
 interface ChildComponentProps {
-  resData: (prop?: number) => void;
+  resData: (prop?: number | string) => void;
 }
 
 const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
@@ -23,16 +24,9 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [name, setName] = useState<string>("");
 
-  const [segments, setSegements] = useState<Array<string>>([
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-  ]);
+  const intailSegements = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
+  const [segments, setSegements] = useState<Array<string>>(intailSegements);
 
   const router = useRouter();
 
@@ -96,7 +90,13 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
       const formSubmitted = localStorage.getItem(`formSubmitted_${id}`);
       setHasSubmitted(!!formSubmitted);
       if (formSubmitted) {
-        alert("You have already submitted this form.");
+        toast.warning(`You have already submitted this form.`, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          draggable: true,
+        });
         router.push("/");
       }
     }
@@ -173,7 +173,7 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
 
         setSelectedSegment(res);
         id && winner(name, segments[segmentIndex], id);
-        resData(parseInt(res));
+        resData(res);
       }
     };
 
@@ -183,15 +183,23 @@ const SpinTheWheel: React.FC<ChildComponentProps> = ({ resData }) => {
   useEffect(() => {
     if (id && !spinning && selectedSegment) {
       localStorage.setItem(`formSubmitted_${id}`, "true");
-      alert(`Congratulations you won ${selectedSegment}`);
-
-      router.push("/");
-      window.location.reload()
+      toast.success(`Congratulations you won ${selectedSegment}`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+      });
+      setTimeout(() => {
+        router.push("/");
+        setSegements(intailSegements);
+      }, 3000);
     }
   }, [id, spinning, selectedSegment, router]);
 
   return (
     <>
+      <ToastContainer />
       {showModal && (
         <div className="fixed inset-0 z-[2] flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg">
